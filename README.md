@@ -58,4 +58,4 @@ system, credential or network endpoint is touched.
 `scripts` eval + demo · `tests` manual + AI-generated · `docs` architecture, testing, limitations.
 
 ## GitHub
-Repository: <ADD YOUR GITHUB URL HERE> (commit history is the development record).
+Repository: https://github.com/Fatimafaiq/mcp-tool-poisoning-scanner (commit history is the development record).
