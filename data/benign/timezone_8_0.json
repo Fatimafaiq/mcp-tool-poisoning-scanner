@@ -1,0 +1,11 @@
+{
+  "server": "benign_8_0",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "timezone",
+      "description": "Return the current local time for a given IANA timezone.",
+      "parameters": {}
+    }
+  ]
+}

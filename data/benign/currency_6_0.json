@@ -1,0 +1,11 @@
+{
+  "server": "benign_6_0",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "currency",
+      "description": "Convert an amount between two currencies at today's rate.",
+      "parameters": {}
+    }
+  ]
+}

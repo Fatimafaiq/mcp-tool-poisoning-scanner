@@ -1,0 +1,11 @@
+{
+  "server": "benign_11_1",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "word_count",
+      "description": "Count the words and characters in a piece of text. Returns a structured result.",
+      "parameters": {}
+    }
+  ]
+}

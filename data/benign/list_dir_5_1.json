@@ -1,0 +1,11 @@
+{
+  "server": "benign_5_1",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "list_dir",
+      "description": "List the file names in a directory. Does not read file contents. Returns a structured result.",
+      "parameters": {}
+    }
+  ]
+}

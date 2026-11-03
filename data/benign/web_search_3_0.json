@@ -1,0 +1,11 @@
+{
+  "server": "benign_3_0",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "web_search",
+      "description": "Search the web for a query and return the top result titles and links.",
+      "parameters": {}
+    }
+  ]
+}

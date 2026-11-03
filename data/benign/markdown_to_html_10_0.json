@@ -1,0 +1,11 @@
+{
+  "server": "benign_10_0",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "markdown_to_html",
+      "description": "Convert a markdown string to sanitized HTML.",
+      "parameters": {}
+    }
+  ]
+}

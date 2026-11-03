@@ -1,0 +1,506 @@
+[
+  {
+    "path": "benign/read_file_0_0.json",
+    "label": "benign",
+    "base_id": "b00",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/read_file_0_1.json",
+    "label": "benign",
+    "base_id": "b01",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/get_weather_1_0.json",
+    "label": "benign",
+    "base_id": "b10",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/get_weather_1_1.json",
+    "label": "benign",
+    "base_id": "b11",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/calculator_2_0.json",
+    "label": "benign",
+    "base_id": "b20",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/calculator_2_1.json",
+    "label": "benign",
+    "base_id": "b21",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/web_search_3_0.json",
+    "label": "benign",
+    "base_id": "b30",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/web_search_3_1.json",
+    "label": "benign",
+    "base_id": "b31",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/translate_4_0.json",
+    "label": "benign",
+    "base_id": "b40",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/translate_4_1.json",
+    "label": "benign",
+    "base_id": "b41",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/list_dir_5_0.json",
+    "label": "benign",
+    "base_id": "b50",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/list_dir_5_1.json",
+    "label": "benign",
+    "base_id": "b51",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/currency_6_0.json",
+    "label": "benign",
+    "base_id": "b60",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/currency_6_1.json",
+    "label": "benign",
+    "base_id": "b61",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/summarize_7_0.json",
+    "label": "benign",
+    "base_id": "b70",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/summarize_7_1.json",
+    "label": "benign",
+    "base_id": "b71",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/timezone_8_0.json",
+    "label": "benign",
+    "base_id": "b80",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/timezone_8_1.json",
+    "label": "benign",
+    "base_id": "b81",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/unit_convert_9_0.json",
+    "label": "benign",
+    "base_id": "b90",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/unit_convert_9_1.json",
+    "label": "benign",
+    "base_id": "b91",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/markdown_to_html_10_0.json",
+    "label": "benign",
+    "base_id": "b100",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/markdown_to_html_10_1.json",
+    "label": "benign",
+    "base_id": "b101",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/word_count_11_0.json",
+    "label": "benign",
+    "base_id": "b110",
+    "variant": "plain"
+  },
+  {
+    "path": "benign/word_count_11_1.json",
+    "label": "benign",
+    "base_id": "b111",
+    "variant": "plain"
+  },
+  {
+    "path": "malicious/atk0_plain.json",
+    "label": "malicious",
+    "base_id": "atk0",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk0_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk0",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk0_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk0",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk0_base64.json",
+    "label": "malicious",
+    "base_id": "atk0",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk0_mixed.json",
+    "label": "malicious",
+    "base_id": "atk0",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk1_plain.json",
+    "label": "malicious",
+    "base_id": "atk1",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk1_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk1",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk1_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk1",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk1_base64.json",
+    "label": "malicious",
+    "base_id": "atk1",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk1_mixed.json",
+    "label": "malicious",
+    "base_id": "atk1",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk2_plain.json",
+    "label": "malicious",
+    "base_id": "atk2",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk2_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk2",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk2_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk2",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk2_base64.json",
+    "label": "malicious",
+    "base_id": "atk2",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk2_mixed.json",
+    "label": "malicious",
+    "base_id": "atk2",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk3_plain.json",
+    "label": "malicious",
+    "base_id": "atk3",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk3_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk3",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk3_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk3",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk3_base64.json",
+    "label": "malicious",
+    "base_id": "atk3",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk3_mixed.json",
+    "label": "malicious",
+    "base_id": "atk3",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk4_plain.json",
+    "label": "malicious",
+    "base_id": "atk4",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk4_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk4",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk4_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk4",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk4_base64.json",
+    "label": "malicious",
+    "base_id": "atk4",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk4_mixed.json",
+    "label": "malicious",
+    "base_id": "atk4",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk5_plain.json",
+    "label": "malicious",
+    "base_id": "atk5",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk5_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk5",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk5_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk5",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk5_base64.json",
+    "label": "malicious",
+    "base_id": "atk5",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk5_mixed.json",
+    "label": "malicious",
+    "base_id": "atk5",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk6_plain.json",
+    "label": "malicious",
+    "base_id": "atk6",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk6_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk6",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk6_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk6",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk6_base64.json",
+    "label": "malicious",
+    "base_id": "atk6",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk6_mixed.json",
+    "label": "malicious",
+    "base_id": "atk6",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk7_plain.json",
+    "label": "malicious",
+    "base_id": "atk7",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk7_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk7",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk7_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk7",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk7_base64.json",
+    "label": "malicious",
+    "base_id": "atk7",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk7_mixed.json",
+    "label": "malicious",
+    "base_id": "atk7",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk8_plain.json",
+    "label": "malicious",
+    "base_id": "atk8",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk8_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk8",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk8_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk8",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk8_base64.json",
+    "label": "malicious",
+    "base_id": "atk8",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk8_mixed.json",
+    "label": "malicious",
+    "base_id": "atk8",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk9_plain.json",
+    "label": "malicious",
+    "base_id": "atk9",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk9_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk9",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk9_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk9",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk9_base64.json",
+    "label": "malicious",
+    "base_id": "atk9",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk9_mixed.json",
+    "label": "malicious",
+    "base_id": "atk9",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk10_plain.json",
+    "label": "malicious",
+    "base_id": "atk10",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk10_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk10",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk10_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk10",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk10_base64.json",
+    "label": "malicious",
+    "base_id": "atk10",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk10_mixed.json",
+    "label": "malicious",
+    "base_id": "atk10",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "malicious/atk11_plain.json",
+    "label": "malicious",
+    "base_id": "atk11",
+    "variant": "plain"
+  },
+  {
+    "path": "obfuscated/atk11_zero_width.json",
+    "label": "malicious",
+    "base_id": "atk11",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk11_homoglyph.json",
+    "label": "malicious",
+    "base_id": "atk11",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk11_base64.json",
+    "label": "malicious",
+    "base_id": "atk11",
+    "variant": "obfuscated"
+  },
+  {
+    "path": "obfuscated/atk11_mixed.json",
+    "label": "malicious",
+    "base_id": "atk11",
+    "variant": "obfuscated"
+  }
+]

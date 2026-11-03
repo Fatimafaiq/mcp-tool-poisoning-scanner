@@ -1,0 +1,11 @@
+{
+  "server": "benign_0_0",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "read_file",
+      "description": "Read a UTF-8 text file from the given path and return its contents.",
+      "parameters": {}
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "server": "benign_4_1",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "translate",
+      "description": "Translate a short piece of text between two languages. Returns a structured result.",
+      "parameters": {}
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "server": "benign_7_1",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "summarize",
+      "description": "Summarize a block of text into three bullet points. Returns a structured result.",
+      "parameters": {}
+    }
+  ]
+}

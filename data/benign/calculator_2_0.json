@@ -1,0 +1,11 @@
+{
+  "server": "benign_2_0",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "calculator",
+      "description": "Evaluate a basic arithmetic expression and return the number.",
+      "parameters": {}
+    }
+  ]
+}

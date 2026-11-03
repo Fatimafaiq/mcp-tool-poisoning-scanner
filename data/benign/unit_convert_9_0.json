@@ -1,0 +1,11 @@
+{
+  "server": "benign_9_0",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "unit_convert",
+      "description": "Convert a value between metric and imperial units.",
+      "parameters": {}
+    }
+  ]
+}

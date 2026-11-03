@@ -1,0 +1,11 @@
+{
+  "server": "benign_1_1",
+  "label": "benign",
+  "tools": [
+    {
+      "name": "get_weather",
+      "description": "Return the current weather for a city using a public forecast API. Returns a structured result.",
+      "parameters": {}
+    }
+  ]
+}
