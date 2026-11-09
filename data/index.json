@@ -502,5 +502,101 @@
     "label": "malicious",
     "base_id": "atk11",
     "variant": "obfuscated"
+  },
+  {
+    "path": "controls/translate_ru.json",
+    "label": "benign",
+    "base_id": "c00",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/weather_ru.json",
+    "label": "benign",
+    "base_id": "c01",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/greek_glossary.json",
+    "label": "benign",
+    "base_id": "c02",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/uk_news.json",
+    "label": "benign",
+    "base_id": "c03",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/emoji_family.json",
+    "label": "benign",
+    "base_id": "c04",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/hyphenate.json",
+    "label": "benign",
+    "base_id": "c05",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/persian_note.json",
+    "label": "benign",
+    "base_id": "c06",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/base64_codec.json",
+    "label": "benign",
+    "base_id": "c07",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/jwt_inspect.json",
+    "label": "benign",
+    "base_id": "c08",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/sha256.json",
+    "label": "benign",
+    "base_id": "c09",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/image_inline.json",
+    "label": "benign",
+    "base_id": "c10",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/ru_codec.json",
+    "label": "benign",
+    "base_id": "c11",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/emoji_ru.json",
+    "label": "benign",
+    "base_id": "c12",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/keychain_ru.json",
+    "label": "benign",
+    "base_id": "c13",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/arabic_dates.json",
+    "label": "benign",
+    "base_id": "c14",
+    "variant": "unicode_control"
+  },
+  {
+    "path": "controls/uuid.json",
+    "label": "benign",
+    "base_id": "c15",
+    "variant": "unicode_control"
   }
 ]

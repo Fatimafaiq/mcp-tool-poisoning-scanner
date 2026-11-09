@@ -1,0 +1,13 @@
+{
+  "server": "c00",
+  "label": "benign",
+  "base_id": "c00",
+  "variant": "unicode_control",
+  "tools": [
+    {
+      "name": "translate_ru",
+      "description": "Переводит короткий текст с русского языка на английский и обратно.",
+      "parameters": {}
+    }
+  ]
+}

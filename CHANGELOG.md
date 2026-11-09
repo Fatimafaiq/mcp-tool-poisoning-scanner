@@ -1,5 +1,21 @@
 # Changelog (development history)
 
+## v0.4.0 - iteration 3 (false-positive fix and stronger evaluation)
+- Failure found: legitimate tools with non-Latin text, emoji joiners or encoded examples were
+  blocked as attacks (3 of 16 new benign Unicode controls, FPR 0.188), because any obfuscation
+  flag added risk weight even with no attack content.
+- Revision: zero-width flagged only inside Latin words; homoglyphs mapped and flagged only in
+  mixed-script words (Unicode TR39 idea); soft hyphen stripped but not flagged; obfuscation flags
+  now corroborate a content rule hit, and on their own only escalate the tool to the judge.
+- Retest: control FPR 0.188 -> 0.000 with no loss of obfuscated recall (0.958); all tests pass.
+- Benchmark: +16 benign Unicode controls (100 manifests).
+- Evaluation: frozen group-wise 40/60 dev/test split, Wilson 95% CIs, exact McNemar test,
+  flag ablation, measured latency, share of tools sent to the judge.
+- Tests: +5 manually written regression tests (3 fail on v0.3, all pass on v0.4).
+- Demo: `demo/index.html`, browser port of the scanner on the real benchmark, with a live Claude
+  LLM-as-judge (raw vs normalised text) and saved runs; replaces the earlier hand-written demo page.
+- Judge prompt hardened: tool text is marked as untrusted data inside <tool> tags.
+
 ## v0.3.0 - 2026-11-03
 - Added obfuscation on/off evaluation and the mock-agent ASR harness.
 - Added AI-generated test file alongside the manual suite (edge cases: mixed obfuscation, benign trap).

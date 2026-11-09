@@ -33,21 +33,33 @@ a hosted LLM API, scikit-learn / SciPy (stats), Streamlit (dashboard).
 ```bash
 pip install -r requirements.txt
 python data/build_dataset.py          # generate the labelled benchmark (defanged)
-PYTHONPATH=src python -m pytest -q     # run the test suite
+PYTHONPATH=src python -m pytest -q     # run the test suite (14 tests)
 python scripts/run_eval.py            # run the evaluation -> results.json
 python scripts/demo.py                # one-screen demonstration
 PYTHONPATH=src python -m mcpscan.cli data/obfuscated --mode hybrid   # scan a folder
 ```
 
-## Preliminary results (offline heuristic judge, N=84 manifests)
-| Detector | Obfuscated recall | Obfuscated F1 | FPR |
-|---|---|---|---|
-| rule, no normalization | 0.042 | 0.08 | 0.00 |
-| rule, with normalization | 0.958 | 0.979 | 0.00 |
-| hybrid | 0.958 | 0.979 | 0.00 |
+## Preliminary results (v0.4, offline heuristic judge, frozen test split)
+100 manifests (24 benign, 16 benign Unicode controls, 12 plain attacks, 48 obfuscated);
+group-wise 40/60 dev/test split, so an attack and its variants never cross the split.
 
-End-to-end **ASR: 1.00 (scanner off) -> 0.067 (hybrid on)**, 93.3% of attacks prevented.
-Normalization lifts obfuscated recall from 4.2% to 95.8%, which is the core finding.
+| Detector | Obfuscated recall (95% CI) | Obfuscated F1 | FPR benign | FPR Unicode controls |
+|---|---|---|---|---|
+| rule, no normalization | 0.036 (0.006 to 0.177) | 0.069 | 0.00 | 0.00 |
+| rule, with normalization | 0.964 (0.823 to 0.994) | 0.982 | 0.00 | 0.00 |
+| LLM stub only | 0.857 (0.685 to 0.943) | 0.923 | 0.00 | 0.00 |
+| hybrid | 0.964 (0.823 to 0.994) | 0.982 | 0.00 | 0.00 |
+
+Normalization lifts obfuscated recall from 3.6% to 96.4% (exact McNemar p < 0.001).
+End-to-end ASR on the test split: 1.00 (scanner off) -> 0.057 (hybrid on).
+v0.3 blocked 3 of 16 legitimate Unicode tools (FPR 0.188); v0.4 blocks none.
+See `docs/testing_and_limitations.md` for the iteration log and limitations.
+
+## Interactive demo
+`demo/index.html` runs the same scanner in the browser (a line-for-line port, checked identical to the
+Python code on all 100 manifests). Open it directly for the rule stage and offline stub judge; open the
+published Claude artifact to use Claude as a live LLM-as-judge and save benchmark runs. Screenshots are in
+`docs/screenshots/`.
 
 ## Safety
 All malicious manifests are **inert strings** targeting only a local `.local` sink. No real

@@ -1,103 +1,362 @@
 {
+  "seed": 305,
+  "dev_fraction": 0.4,
   "counts": {
-    "benign": 24,
-    "mal_plain": 12,
-    "mal_obf": 48
+    "all": 100,
+    "dev": 41,
+    "test": 59
   },
-  "detectors": {
+  "full": {
     "rule_no_norm": {
-      "plain": {
-        "precision": 1.0,
-        "recall": 0.667,
-        "f1": 0.8,
-        "fpr": 0.0,
-        "tp": 8,
-        "fp": 0,
-        "tn": 24,
-        "fn": 4
+      "n": {
+        "benign": 24,
+        "controls": 16,
+        "mal_plain": 12,
+        "mal_obf": 48
       },
-      "obfuscated": {
-        "precision": 1.0,
-        "recall": 0.042,
-        "f1": 0.08,
-        "fpr": 0.0,
-        "tp": 2,
-        "fp": 0,
-        "tn": 24,
-        "fn": 46
-      }
+      "recall_plain": 0.667,
+      "recall_plain_ci": [
+        0.391,
+        0.862
+      ],
+      "recall_obf": 0.042,
+      "recall_obf_ci": [
+        0.012,
+        0.14
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.08,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.138
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.194
+      ],
+      "fpr_all": 0.0
     },
     "rule_norm": {
-      "plain": {
-        "precision": 1.0,
-        "recall": 0.667,
-        "f1": 0.8,
-        "fpr": 0.0,
-        "tp": 8,
-        "fp": 0,
-        "tn": 24,
-        "fn": 4
+      "n": {
+        "benign": 24,
+        "controls": 16,
+        "mal_plain": 12,
+        "mal_obf": 48
       },
-      "obfuscated": {
-        "precision": 1.0,
-        "recall": 0.958,
-        "f1": 0.979,
-        "fpr": 0.0,
-        "tp": 46,
-        "fp": 0,
-        "tn": 24,
-        "fn": 2
-      }
+      "recall_plain": 0.667,
+      "recall_plain_ci": [
+        0.391,
+        0.862
+      ],
+      "recall_obf": 0.958,
+      "recall_obf_ci": [
+        0.86,
+        0.988
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.979,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.138
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.194
+      ],
+      "fpr_all": 0.0
+    },
+    "rule_norm_noflags": {
+      "n": {
+        "benign": 24,
+        "controls": 16,
+        "mal_plain": 12,
+        "mal_obf": 48
+      },
+      "recall_plain": 0.667,
+      "recall_plain_ci": [
+        0.391,
+        0.862
+      ],
+      "recall_obf": 0.667,
+      "recall_obf_ci": [
+        0.525,
+        0.783
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.8,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.138
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.194
+      ],
+      "fpr_all": 0.0
     },
     "llm_stub": {
-      "plain": {
-        "precision": 1.0,
-        "recall": 0.833,
-        "f1": 0.909,
-        "fpr": 0.0,
-        "tp": 10,
-        "fp": 0,
-        "tn": 24,
-        "fn": 2
+      "n": {
+        "benign": 24,
+        "controls": 16,
+        "mal_plain": 12,
+        "mal_obf": 48
       },
-      "obfuscated": {
-        "precision": 1.0,
-        "recall": 0.833,
-        "f1": 0.909,
-        "fpr": 0.0,
-        "tp": 40,
-        "fp": 0,
-        "tn": 24,
-        "fn": 8
-      }
+      "recall_plain": 0.833,
+      "recall_plain_ci": [
+        0.552,
+        0.953
+      ],
+      "recall_obf": 0.833,
+      "recall_obf_ci": [
+        0.704,
+        0.913
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.909,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.138
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.194
+      ],
+      "fpr_all": 0.0
     },
     "hybrid": {
-      "plain": {
-        "precision": 1.0,
-        "recall": 0.833,
-        "f1": 0.909,
-        "fpr": 0.0,
-        "tp": 10,
-        "fp": 0,
-        "tn": 24,
-        "fn": 2
+      "n": {
+        "benign": 24,
+        "controls": 16,
+        "mal_plain": 12,
+        "mal_obf": 48
       },
-      "obfuscated": {
-        "precision": 1.0,
-        "recall": 0.958,
-        "f1": 0.979,
-        "fpr": 0.0,
-        "tp": 46,
-        "fp": 0,
-        "tn": 24,
-        "fn": 2
-      }
+      "recall_plain": 0.833,
+      "recall_plain_ci": [
+        0.552,
+        0.953
+      ],
+      "recall_obf": 0.958,
+      "recall_obf_ci": [
+        0.86,
+        0.988
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.979,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.138
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.194
+      ],
+      "fpr_all": 0.0
+    }
+  },
+  "test": {
+    "rule_no_norm": {
+      "n": {
+        "benign": 14,
+        "controls": 10,
+        "mal_plain": 7,
+        "mal_obf": 28
+      },
+      "recall_plain": 0.571,
+      "recall_plain_ci": [
+        0.25,
+        0.842
+      ],
+      "recall_obf": 0.036,
+      "recall_obf_ci": [
+        0.006,
+        0.177
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.069,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.215
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.278
+      ],
+      "fpr_all": 0.0
+    },
+    "rule_norm": {
+      "n": {
+        "benign": 14,
+        "controls": 10,
+        "mal_plain": 7,
+        "mal_obf": 28
+      },
+      "recall_plain": 0.571,
+      "recall_plain_ci": [
+        0.25,
+        0.842
+      ],
+      "recall_obf": 0.964,
+      "recall_obf_ci": [
+        0.823,
+        0.994
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.982,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.215
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.278
+      ],
+      "fpr_all": 0.0
+    },
+    "rule_norm_noflags": {
+      "n": {
+        "benign": 14,
+        "controls": 10,
+        "mal_plain": 7,
+        "mal_obf": 28
+      },
+      "recall_plain": 0.571,
+      "recall_plain_ci": [
+        0.25,
+        0.842
+      ],
+      "recall_obf": 0.571,
+      "recall_obf_ci": [
+        0.391,
+        0.735
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.727,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.215
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.278
+      ],
+      "fpr_all": 0.0
+    },
+    "llm_stub": {
+      "n": {
+        "benign": 14,
+        "controls": 10,
+        "mal_plain": 7,
+        "mal_obf": 28
+      },
+      "recall_plain": 0.857,
+      "recall_plain_ci": [
+        0.487,
+        0.974
+      ],
+      "recall_obf": 0.857,
+      "recall_obf_ci": [
+        0.685,
+        0.943
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.923,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.215
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.278
+      ],
+      "fpr_all": 0.0
+    },
+    "hybrid": {
+      "n": {
+        "benign": 14,
+        "controls": 10,
+        "mal_plain": 7,
+        "mal_obf": 28
+      },
+      "recall_plain": 0.857,
+      "recall_plain_ci": [
+        0.487,
+        0.974
+      ],
+      "recall_obf": 0.964,
+      "recall_obf_ci": [
+        0.823,
+        0.994
+      ],
+      "precision_obf": 1.0,
+      "f1_obf": 0.982,
+      "fpr_benign": 0.0,
+      "fpr_benign_ci": [
+        0.0,
+        0.215
+      ],
+      "fpr_controls": 0.0,
+      "fpr_controls_ci": [
+        0.0,
+        0.278
+      ],
+      "fpr_all": 0.0
+    }
+  },
+  "latency_ms": {
+    "rule_no_norm": 0.0374,
+    "rule_norm": 0.086,
+    "rule_norm_noflags": 0.0928,
+    "llm_stub": 0.1376,
+    "hybrid": 0.0863
+  },
+  "hybrid_llm_call_share": 0.11,
+  "mcnemar_test_obf": {
+    "rule_norm_vs_rule_no_norm": {
+      "a_only": 26,
+      "b_only": 0,
+      "p_value": 2.98e-08
+    },
+    "hybrid_vs_llm_stub": {
+      "a_only": 3,
+      "b_only": 0,
+      "p_value": 0.25
+    },
+    "rule_norm_vs_rule_norm_noflags": {
+      "a_only": 11,
+      "b_only": 0,
+      "p_value": 0.000977
     }
   },
   "asr": {
-    "off": 1.0,
-    "on": 0.067,
-    "prevention_rate": 0.933,
-    "attacks": 60
+    "full": {
+      "off": 1.0,
+      "on": 0.067,
+      "prevention_rate": 0.933,
+      "attacks": 60
+    },
+    "test": {
+      "off": 1.0,
+      "on": 0.057,
+      "prevention_rate": 0.943,
+      "attacks": 35
+    }
   }
 }

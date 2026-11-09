@@ -1,0 +1,13 @@
+{
+  "server": "c13",
+  "label": "benign",
+  "base_id": "c13",
+  "variant": "unicode_control",
+  "tools": [
+    {
+      "name": "keychain_ru",
+      "description": "Хранит пароли пользователя только в локальной связке ключей ОС.",
+      "parameters": {}
+    }
+  ]
+}

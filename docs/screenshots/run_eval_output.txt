@@ -1,0 +1,25 @@
+manifests: all=100  dev=41  test=59  (group-wise split, seed 305)
+
+[full]
+detector            rec plain  rec obf  F1 obf FPR benign FPR ctrl ms/manifest
+------------------------------------------------------------------------------
+rule_no_norm            0.667    0.042    0.08        0.0      0.0      0.0374
+rule_norm               0.667    0.958   0.979        0.0      0.0       0.086
+rule_norm_noflags       0.667    0.667     0.8        0.0      0.0      0.0928
+llm_stub                0.833    0.833   0.909        0.0      0.0      0.1376
+hybrid                  0.833    0.958   0.979        0.0      0.0      0.0863
+
+[test]
+detector            rec plain  rec obf  F1 obf FPR benign FPR ctrl ms/manifest
+------------------------------------------------------------------------------
+rule_no_norm            0.571    0.036   0.069        0.0      0.0      0.0374
+rule_norm               0.571    0.964   0.982        0.0      0.0       0.086
+rule_norm_noflags       0.571    0.571   0.727        0.0      0.0      0.0928
+llm_stub                0.857    0.857   0.923        0.0      0.0      0.1376
+hybrid                  0.857    0.964   0.982        0.0      0.0      0.0863
+
+McNemar (test, obfuscated attacks): {"rule_norm_vs_rule_no_norm": {"a_only": 26, "b_only": 0, "p_value": 2.98e-08}, "hybrid_vs_llm_stub": {"a_only": 3, "b_only": 0, "p_value": 0.25}, "rule_norm_vs_rule_norm_noflags": {"a_only": 11, "b_only": 0, "p_value": 0.000977}}
+ASR (hybrid): {"full": {"off": 1.0, "on": 0.067, "prevention_rate": 0.933, "attacks": 60}, "test": {"off": 1.0, "on": 0.057, "prevention_rate": 0.943, "attacks": 35}}
+Hybrid share of tools sent to judge: 0.11
+
+saved /home/claude/v04/repo/results.json

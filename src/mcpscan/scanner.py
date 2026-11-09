@@ -17,12 +17,20 @@ class RuleScanner:
         for r in self.rules:
             if r["re"].search(n["clean"]):
                 s += r["weight"]; hits.append(r["id"])
+        content_hit = bool(hits)
+        flag_s = 0.0
         for fl in n["flags"]:
             w = float(self.flag_w.get(fl, 0))
             if w:
-                s += w; hits.append("flag:" + fl)
+                flag_s += w; hits.append("flag:" + fl)
+        # v0.4: obfuscation is corroborating evidence only. It adds weight when a content rule
+        # also fires; on its own it can only escalate the tool to the judge ("uncertain").
+        if content_hit:
+            s += flag_s
         score = min(1.0, s)
         verdict = "benign" if score <= self.t_low else ("malicious" if score >= self.t_high else "uncertain")
+        if not content_hit and flag_s > 0:
+            verdict = "uncertain"
         return {"score": round(score, 3), "verdict": verdict, "hits": hits,
                 "transforms": n["transforms"], "flags": n["flags"]}
 
