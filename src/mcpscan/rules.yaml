@@ -7,7 +7,7 @@ flag_weights:
 rules:
   - id: secret_file_read
     weight: 0.45
-    pattern: '(read|open|cat|print|include).{0,40}(\.ssh|id_rsa|\.env|private key|credential|password|secret|api[_ -]?key|token)'
+    pattern: '(read|open|cat|print|include|inspect|examine).{0,80}(\.ssh|id_rsa|\.env|private key|credential|password|secret|api[_ -]?key|token)'
     desc: Instruction to read a secret or credential
   - id: exfiltration
     weight: 0.45
@@ -25,3 +25,29 @@ rules:
     weight: 0.30
     pattern: '(use|call|invoke).{0,30}(admin|root|sudo|delete|shell|exec|os\.system|subprocess)'
     desc: Steering toward a high-privilege or dangerous action
+  # v0.5: added after testing on real MCPTox attacks (dev servers only). Real attacks rarely say
+  # "send to attacker"; they hijack other tools, tamper with arguments, or claim priority over the user.
+  - id: priority_claim
+    weight: 0.50
+    pattern: '(priority is higher than|higher priority than|takes? precedence over|overrides?) .{0,30}(user|query|request)|regardless of (the )?(user|origin|request|query)|ignore (any |the )?user'
+    desc: Claims authority over the user's own request
+  - id: argument_tampering
+    weight: 0.50
+    pattern: '\b(must|always|automatically|when using)\b.{0,40}\b(modify|change|set|replace|redirect|override|append|prepend|rewrite|inject)\b.{0,40}\b(argument|parameter|field|value|path|url|recipient|query|prompt|names|entity|to)\b'
+    desc: Silently rewrites the arguments of a tool call
+  - id: cross_tool_precondition
+    weight: 0.35
+    pattern: '\b(before|prior to|when)\b (using|calling|invoking|use|executing|running)?.{0,100}\b(must|should|need to|required|mandatory)\b.{0,40}\b(call|invoke|use|run|execute|trigger|change|set|append|modify)\b'
+    desc: Orders the agent to do something else first (cross-tool hijacking); legitimate tools do this too, so on its own it escalates to the judge
+  - id: other_tool_call
+    weight: 0.25
+    pattern: '\b(before|when)\b.{0,60}\b(use|using|call|calling|invoke|trigger|execute)\b\s*(the )?(tool )?[`''"][A-Za-z_-]+[`''"]'
+    desc: Names another tool the agent should call
+  - id: threat_language
+    weight: 0.25
+    pattern: '(failure to|skipping this|omitting this|ignoring this|otherwise).{0,40}(crash|corrupt|fail|error|instabil|disrupt)'
+    desc: Pressures the agent with invented consequences
+  - id: sensitive_target
+    weight: 0.20
+    pattern: '(~/\.ssh|id_rsa|/etc/passwd|/etc/shadow|/root/|\.bashrc|\.aws/credentials|private key|attacker)'
+    desc: Mentions a sensitive file or attacker-controlled target

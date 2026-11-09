@@ -19,13 +19,13 @@
         0.391,
         0.862
       ],
-      "recall_obf": 0.042,
+      "recall_obf": 0.125,
       "recall_obf_ci": [
-        0.012,
-        0.14
+        0.059,
+        0.247
       ],
       "precision_obf": 1.0,
-      "f1_obf": 0.08,
+      "f1_obf": 0.222,
       "fpr_benign": 0.0,
       "fpr_benign_ci": [
         0.0,
@@ -176,13 +176,13 @@
         0.25,
         0.842
       ],
-      "recall_obf": 0.036,
+      "recall_obf": 0.071,
       "recall_obf_ci": [
-        0.006,
-        0.177
+        0.02,
+        0.226
       ],
       "precision_obf": 1.0,
-      "f1_obf": 0.069,
+      "f1_obf": 0.133,
       "fpr_benign": 0.0,
       "fpr_benign_ci": [
         0.0,
@@ -321,18 +321,18 @@
     }
   },
   "latency_ms": {
-    "rule_no_norm": 0.0374,
-    "rule_norm": 0.086,
-    "rule_norm_noflags": 0.0928,
-    "llm_stub": 0.1376,
-    "hybrid": 0.0863
+    "rule_no_norm": 0.0749,
+    "rule_norm": 0.1148,
+    "rule_norm_noflags": 0.1147,
+    "llm_stub": 0.1877,
+    "hybrid": 0.1262
   },
   "hybrid_llm_call_share": 0.11,
   "mcnemar_test_obf": {
     "rule_norm_vs_rule_no_norm": {
-      "a_only": 26,
+      "a_only": 25,
       "b_only": 0,
-      "p_value": 2.98e-08
+      "p_value": 5.96e-08
     },
     "hybrid_vs_llm_stub": {
       "a_only": 3,

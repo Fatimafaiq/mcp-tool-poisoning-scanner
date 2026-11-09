@@ -1,0 +1,27 @@
+t_low: 0.20
+t_high: 0.50
+flag_weights:
+  zero_width: 0.30
+  homoglyph: 0.30
+  encoded_blob: 0.35
+rules:
+  - id: secret_file_read
+    weight: 0.45
+    pattern: '(read|open|cat|print|include).{0,40}(\.ssh|id_rsa|\.env|private key|credential|password|secret|api[_ -]?key|token)'
+    desc: Instruction to read a secret or credential
+  - id: exfiltration
+    weight: 0.45
+    pattern: '(send|forward|upload|exfiltrate|post|email|leak|transmit).{0,40}(http|https|@|endpoint|server|url|attacker)'
+    desc: Instruction to send data out
+  - id: prompt_override
+    weight: 0.40
+    pattern: '(ignore|disregard|override).{0,30}(previous|prior|above|earlier|system).{0,20}(instruction|prompt|rule)?'
+    desc: Prompt-injection override language
+  - id: concealment
+    weight: 0.35
+    pattern: '(do not (tell|mention|inform|notify)|without (telling|informing)|silently|secretly|hidden from)'
+    desc: Instruction to hide the action from the user
+  - id: high_priv_misuse
+    weight: 0.30
+    pattern: '(use|call|invoke).{0,30}(admin|root|sudo|delete|shell|exec|os\.system|subprocess)'
+    desc: Steering toward a high-privilege or dangerous action
