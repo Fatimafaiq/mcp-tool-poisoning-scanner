@@ -70,6 +70,33 @@ PYTHONPATH=src python -m mcpscan.cli data/obfuscated --mode hybrid   # scan a fo
 On Windows PowerShell, replace `PYTHONPATH=src python ...` with
 `$env:PYTHONPATH="src"; python ...`.
 
+## 3b. On your own laptop, without Git
+
+1. Install Python 3.11+ from python.org (Windows: tick "Add python.exe to PATH").
+2. Download the scanner: on https://github.com/Fatimafaiq/mcp-tool-poisoning-scanner click
+   **Code > Download ZIP**, unzip it and open the folder.
+3. Download the real data: on https://github.com/zhiqiangwang4/MCPTox-Benchmark click
+   **Code > Download ZIP**, unzip it, and move the `MCPTox-Benchmark-main` folder into the scanner's
+   `data/external/` folder (create `external` if it is missing). It must contain `response_all.json`
+   and `pure_tool.json`.
+4. Open a terminal in the scanner folder (Windows: in File Explorer type `cmd` in the address bar and
+   press Enter; Mac: right-click the folder > New Terminal at Folder) and run:
+
+```bash
+pip install -r requirements.txt
+python scripts/build_real_dataset.py     # loads MCPTox -> data/real/mcptox_manifests.json
+python scripts/run_real_eval.py          # results table on all the real data
+python scripts/demo.py                   # plain vs disguised attack
+```
+
+Windows tests: `set PYTHONPATH=src` then `python -m pytest -q`. Mac: `PYTHONPATH=src python -m pytest -q`.
+
+5. Demo on the real data: double-click `demo/index.html` to open it in a browser, click
+   **Load dataset file...** and choose `data/real/mcptox_manifests.json`. The page now shows all 2,787
+   real manifests (45 servers) in **Inspect a tool**, and **Run the benchmark** offers the real test
+   servers. Offline, the LLM judge is the keyword stub; use the published Claude page for the live
+   Claude judge.
+
 ## 4. Results to quote
 
 | | Synthetic test split | Real data, 27 unseen servers |

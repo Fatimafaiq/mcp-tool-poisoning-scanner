@@ -17,7 +17,20 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "data"))
 import build_dataset as bd  # noqa: E402  (reuses obf_zero_width / obf_homoglyph / obf_base64 / obf_mixed)
 
-SRC = os.environ.get("MCPTOX_DIR", os.path.join(ROOT, "data", "external", "MCPTox-Benchmark"))
+EXT = os.path.join(ROOT, "data", "external")
+
+
+def find_source():
+    """MCPTox folder: a command-line path, MCPTOX_DIR, or any folder in data/external that holds
+    response_all.json (so a GitHub "Download ZIP" folder such as MCPTox-Benchmark-main also works)."""
+    cands = sys.argv[1:2] + [os.environ.get("MCPTOX_DIR", "")]
+    if os.path.isdir(EXT):
+        cands += [os.path.join(EXT, d) for d in sorted(os.listdir(EXT))]
+    for c in cands:
+        if c and os.path.isfile(os.path.join(c, "response_all.json")) and os.path.isfile(os.path.join(c, "pure_tool.json")):
+            return c
+    sys.exit("MCPTox data not found. Put the MCPTox-Benchmark folder (with response_all.json and "
+             "pure_tool.json) inside data/external/, or run: python scripts/build_real_dataset.py <folder>")
 OUT = os.path.join(ROOT, "data", "real")
 SEED = 305
 
@@ -50,11 +63,13 @@ def malicious_tools(pure):
 
 
 def manifest(server, name, desc, label, base_id, variant):
-    return {"server": server, "label": label, "base_id": base_id, "variant": variant,
+    return {"server": server, "label": label, "base_id": base_id, "variant": variant, "split": "",
             "tools": [{"name": name, "description": desc, "parameters": {}}]}
 
 
 def main():
+    SRC = find_source()
+    print("reading MCPTox from", SRC)
     resp = json.load(open(os.path.join(SRC, "response_all.json"), encoding="utf-8"))
     pure = json.load(open(os.path.join(SRC, "pure_tool.json"), encoding="utf-8"))
     random.seed(SEED)
@@ -70,6 +85,12 @@ def main():
             m = manifest(srv, name, fn(desc), "malicious", bid, "obfuscated")
             m["obfuscation"] = tag
             rows.append(m)
+    # Split by server (same rule as run_real_eval.py): 40% dev servers, 60% unseen test servers.
+    servers = sorted({r["server"] for r in rows})
+    random.Random(SEED).shuffle(servers)
+    dev = set(servers[:round(0.4 * len(servers))])
+    for r in rows:
+        r["split"] = "dev" if r["server"] in dev else "test"
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "mcptox_manifests.json"), "w", encoding="utf-8") as f:
         json.dump(rows, f, ensure_ascii=False, indent=1)
