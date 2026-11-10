@@ -11,42 +11,43 @@
 <style>
 /* Layout: a two-pane inspector (manifest in, verdict out) and a benchmark bench below a tab bar. */
 :root {
-  /* "Blacklight": tool text is ink on lavender paper; hidden ink glows UV pink once revealed */
-  --paper: #eceefb; --panel: #ffffff; --ink: #211f45; --muted: #6a6890; --line: #dcdcf2; --wash: #f4f4fd;
-  --accent: #5a4fe0; --accent-ink: #ffffff; --uv: #e0408a; --uv-wash: #fde7f1;
-  --band: #211f45; --band-ink: #f4f3ff; --band-muted: #b9b6e6;
-  --ok: #18815a; --ok-wash: #e1f5ec; --warn: #a65e00; --warn-wash: #fff1db; --bad: #cc2f52; --bad-wash: #fde6ec;
-  --hidden: #e0408a; --glyph: #a65e00;
+  /* Palette: #003135 deep teal, #024950 petrol, #964734 rust, #0FA4AF teal, #AFDDE5 aqua */
+  --paper: #e8f5f7; --panel: #ffffff; --ink: #003135; --muted: #3f6b70; --line: #c6e4ea; --wash: #f1f9fa;
+  --accent: #024950; --accent-ink: #ffffff; --teal: #0FA4AF; --aqua: #AFDDE5; --uv: #964734; --uv-wash: #f6e7e2;
+  --band: #003135; --band-ink: #eef9fb; --band-muted: #AFDDE5;
+  --ok: #0a7a83; --ok-wash: #ddf2f4; --warn: #8a5f10; --warn-wash: #f8eedb; --bad: #964734; --bad-wash: #f6e7e2;
+  --hidden: #964734; --glyph: #8a5f10;
   --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --paper: #15142c; --panel: #1e1d3b; --ink: #ecebff; --muted: #a3a1cc; --line: #312f57; --wash: #262449;
-  --accent: #a59cff; --accent-ink: #17153a; --uv: #ff74b4; --uv-wash: #44173a;
-  --band: #0f0e24; --band-ink: #ecebff; --band-muted: #a3a1cc;
-  --ok: #5ed6a4; --ok-wash: #13332a; --warn: #f2b25c; --warn-wash: #3a2a12; --bad: #ff7d98; --bad-wash: #42182a;
-  --hidden: #ff74b4; --glyph: #f2b25c; color-scheme: dark; } }
+  --paper: #002326; --panel: #003135; --ink: #e6f6f8; --muted: #9cc7cd; --line: #0b5258; --wash: #023d42;
+  --accent: #0FA4AF; --accent-ink: #00262a; --teal: #0FA4AF; --aqua: #AFDDE5; --uv: #d9846c; --uv-wash: #3e2a24;
+  --band: #001b1e; --band-ink: #eef9fb; --band-muted: #AFDDE5;
+  --ok: #5fd0d8; --ok-wash: #063f44; --warn: #e3b866; --warn-wash: #3a2f15; --bad: #e0937c; --bad-wash: #43271f;
+  --hidden: #d9846c; --glyph: #e3b866; color-scheme: dark; } }
 :root[data-theme="dark"] {
-  --paper: #15142c; --panel: #1e1d3b; --ink: #ecebff; --muted: #a3a1cc; --line: #312f57; --wash: #262449;
-  --accent: #a59cff; --accent-ink: #17153a; --uv: #ff74b4; --uv-wash: #44173a;
-  --band: #0f0e24; --band-ink: #ecebff; --band-muted: #a3a1cc;
-  --ok: #5ed6a4; --ok-wash: #13332a; --warn: #f2b25c; --warn-wash: #3a2a12; --bad: #ff7d98; --bad-wash: #42182a;
-  --hidden: #ff74b4; --glyph: #f2b25c; color-scheme: dark; }
+  --paper: #002326; --panel: #003135; --ink: #e6f6f8; --muted: #9cc7cd; --line: #0b5258; --wash: #023d42;
+  --accent: #0FA4AF; --accent-ink: #00262a; --teal: #0FA4AF; --aqua: #AFDDE5; --uv: #d9846c; --uv-wash: #3e2a24;
+  --band: #001b1e; --band-ink: #eef9fb; --band-muted: #AFDDE5;
+  --ok: #5fd0d8; --ok-wash: #063f44; --warn: #e3b866; --warn-wash: #3a2f15; --bad: #e0937c; --bad-wash: #43271f;
+  --hidden: #d9846c; --glyph: #e3b866; color-scheme: dark; }
 * { box-sizing: border-box; }
 body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body); }
 .wrap { max-width: 1120px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .band { background: var(--band); color: var(--band-ink); border-radius: 22px; padding: 28px 28px 24px; display: block;
-  background-image: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--uv) 22%, transparent), transparent 55%); }
+  background-image: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--teal) 38%, transparent), transparent 58%), linear-gradient(160deg, var(--band), #024950); }
 .band h1 { font: 700 clamp(2rem, 5vw, 3.1rem)/1 var(--display); letter-spacing: -0.03em; }
 .band .sub { color: var(--band-muted); font-size: 1rem; margin-top: 10px; }
 .band .meta { color: var(--band-muted); margin-top: 18px; font: 500 12px var(--body); gap: 8px; }
 .band .meta > * { border: 1px solid color-mix(in srgb, var(--band-muted) 35%, transparent); border-radius: 999px; padding: 3px 10px; }
 .band .meta a { color: var(--band-ink); text-decoration: none; }
+.pane .meter i { background: linear-gradient(90deg, var(--teal), var(--accent)); }
 .reveal { margin-top: 20px; font: 400 14px/1.6 var(--mono); color: var(--band-ink); background: color-mix(in srgb, var(--band-ink) 7%, transparent); border-radius: 12px; padding: 12px 14px; max-width: 72ch; }
 .reveal .lead { display: block; font: 500 12px var(--body); color: var(--band-muted); margin-bottom: 4px; }
 .reveal .ink { color: transparent; border-radius: 4px; transition: color .9s ease, background-color .9s ease, text-shadow .9s ease; }
-.reveal.lit .ink { color: var(--uv); background: color-mix(in srgb, var(--uv) 16%, transparent); text-shadow: 0 0 14px color-mix(in srgb, var(--uv) 70%, transparent); }
+.reveal.lit .ink { color: #fff4ef; background: #964734; box-shadow: 0 0 18px color-mix(in srgb, #964734 70%, transparent); }
 @media (prefers-reduced-motion: reduce) { .reveal .ink { transition: none; } }
 header { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: end; justify-content: space-between; }
 h1 { font: 600 1.75rem/1.1 var(--display); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
