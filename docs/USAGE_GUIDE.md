@@ -23,7 +23,21 @@ Our scanner checks every tool description **before** the agent loads it:
 
 ## 2. The demo (what to show the panel)
 
-Open the published demo in Claude. It has two tabs.
+Open the published demo in Claude (or double-click `demo/index.html`). It has three tabs.
+
+**Scan server files (real files, nothing typed by you)**
+1. Download real MCP servers from GitHub (Code > Download ZIP, then unzip):
+   - https://github.com/invariantlabs-ai/mcp-injection-experiments: the published attacks
+   - https://github.com/harishsg993010/damn-vulnerable-MCP-server: 15 vulnerable servers
+   - https://github.com/modelcontextprotocol/servers: the official servers, which should come out clean
+2. Click **Choose a folder...** (or drop the folder on the page). The scanner reads every server
+   file as text (never runs it), finds each tool, and shows a verdict per tool and per file.
+3. Malicious files are listed first and opened. Each tool shows the rules that fired and the exact
+   words matched. Click **Inspect** to open that tool in the inspector.
+4. Tick **Disguise every description before scanning**: every description gets look-alike letters
+   and invisible characters. With normalisation on, the poisoned tools are still caught. Untick
+   **Unicode normalisation**: 0 are caught. That is the research gap, shown on real files.
+5. Uncertain tools go to Claude (live in the Claude page) or the offline stub.
 
 **Inspect a tool**
 1. Pick **Real MCP data (MCPTox)**, then **Plain attacks**. The first example is a real attack:
@@ -56,13 +70,17 @@ git clone https://github.com/Fatimafaiq/mcp-tool-poisoning-scanner
 cd mcp-tool-poisoning-scanner
 pip install -r requirements.txt
 
-PYTHONPATH=src python -m pytest -q        # 18 passed, 1 xfailed (known limitation)
+PYTHONPATH=src python -m pytest -q        # 25 passed, 1 xfailed (known limitation)
 python scripts/demo.py                   # one-screen walkthrough of a single attack
 python scripts/run_eval.py               # synthetic benchmark -> results.json
 
 git clone https://github.com/zhiqiangwang4/MCPTox-Benchmark data/external/MCPTox-Benchmark
 python scripts/build_real_dataset.py     # builds 2,787 real manifests, defanged, in data/real/
-python scripts/run_real_eval.py          # real-data results, v0.4 vs v0.5 -> results_real.json
+python scripts/run_real_eval.py          # real-data results, v0.4 vs v0.6 -> results_real.json
+
+# real server files: put the three downloaded folders in data/external/ (any of the ZIP names work)
+python scripts/scan_file.py data/external/mcp-injection-experiments-main   # scan any file or folder
+python scripts/run_realfiles_eval.py     # scores all 48 real files against data/realfiles_labels.json
 
 PYTHONPATH=src python -m mcpscan.cli data/obfuscated --mode hybrid   # scan a folder of manifests
 ```
@@ -87,6 +105,8 @@ pip install -r requirements.txt
 python scripts/build_real_dataset.py     # loads MCPTox -> data/real/mcptox_manifests.json
 python scripts/run_real_eval.py          # results table on all the real data
 python scripts/demo.py                   # plain vs disguised attack
+python scripts/scan_file.py data/external  # scan every real server file you downloaded
+python scripts/run_realfiles_eval.py     # score them against the labels
 ```
 
 Windows tests: `set PYTHONPATH=src` then `python -m pytest -q`. Mac: `PYTHONPATH=src python -m pytest -q`.
@@ -99,11 +119,11 @@ Windows tests: `set PYTHONPATH=src` then `python -m pytest -q`. Mac: `PYTHONPATH
 
 ## 4. Results to quote
 
-| | Synthetic test split | Real data, 27 unseen servers |
-|---|---|---|
-| Recall, plain attacks | 0.571 (rules), 0.857 (hybrid) | 0.023 (v0.4) -> 0.653 (v0.5) |
-| Recall, obfuscated | 0.071 without normalisation -> 0.964 with | 0.149 without -> 0.808 with |
-| False-positive rate | 0.00 | 0.00 (0 of 187 real tools) |
+| | Synthetic test split | MCPTox, 27 unseen servers | Real server files (48 files) |
+|---|---|---|---|
+| Poisoned caught | 0.571 (rules), 0.857 (hybrid) | 0.008 (v0.4) -> 0.592 (v0.6) | 5 of 7 (hybrid) |
+| Disguised caught | 0.071 without normalisation -> 0.964 with | 0.149 without -> 0.785 with | 1 of 28 without -> 20 of 28 with |
+| Legitimate tools blocked | 0 | 0 of 187 | 2 of 138 |
 
 ## 5. What to say (short script)
 
@@ -113,15 +133,21 @@ Windows tests: `set PYTHONPATH=src` then `python -m pytest -q`. Mac: `PYTHONPATH
 - **Artefact:** "A scanner that cleans the text first, scores it with rules, and asks an LLM only
   when unsure."
 - **Evidence:** "Without normalisation, rules caught 7% of obfuscated attacks; with it, 96% on our
-  benchmark and 81% on real attacks from 27 unseen servers, with no legitimate tools blocked."
-- **Iteration:** "When we first ran on real data, our rules caught only 2% of real attacks, because
-  real attackers write differently from our synthetic examples. We added six rules using only the
-  dev servers, froze them, and recall on unseen servers rose to 65%."
-- **Honesty:** "Dev recall was 91% and test 65%, so the rules partly fit the servers we studied.
-  Most of what is still missed is sent to the LLM judge, which is what the hybrid design is for."
+  benchmark and 79% on real attacks from 27 unseen servers, with no legitimate tools blocked. On
+  real server files from GitHub, disguised attacks went from 1 in 28 caught to 20 in 28."
+- **Iteration:** "First real data (MCPTox): our rules caught 1% of real attacks, because real
+  attackers write differently from our synthetic examples. We added six rules using only the dev
+  servers and recall on unseen servers rose to 59%. Then real server files: we found the scanner
+  flagged ordinary long words as Base64 and matched 'cat' inside 'authenticate'. We fixed those
+  without adding attack rules, and reported the slightly lower recall that followed."
+- **Honesty:** "Dev recall was 89% and test 59%, so the rules partly fit the servers we studied.
+  On real files it still misses 2 of 7 poisoned tools and wrongly blocks 2 of 138 official ones.
 
 ## 6. Likely questions
 
+- **Did you write the malicious files?** No. They are public: Invariant Labs' proof-of-concept
+  attacks and Damn Vulnerable MCP Server, downloaded from GitHub and scanned unchanged. Which tools
+  are poisoned comes from each project's own documentation (`data/realfiles_labels.json`).
 - **Is the data real?** The 485 attacks and 362 benign descriptions are from MCPTox (AAAI 2026),
   built on 45 real MCP servers. The obfuscated copies are made by our own functions. Links and
   addresses in the attacks are replaced with harmless `.local` placeholders.

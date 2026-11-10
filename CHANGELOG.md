@@ -1,5 +1,28 @@
 # Changelog (development history)
 
+## v0.6.0 - iteration 5 (tested on real MCP server files)
+- New: `mcpscan.extract` reads real MCP server source files (FastMCP Python, TypeScript/JavaScript
+  `registerTool`/`server.tool`, `tools/list` JSON) as text, without running them, including a
+  description swapped at run time (`fn.__doc__ = ...`, the rug pull in Invariant's WhatsApp attack).
+  `scripts/scan_file.py <file or folder>` scans any server; `scripts/run_realfiles_eval.py` scores
+  48 real files: Invariant Labs' published attacks, Damn Vulnerable MCP Server, and the official
+  reference servers. Ground truth: `data/realfiles_labels.json` (7 poisoned tools, 138 benign).
+- Failures found: (1) the Base64 check flagged ordinary long words ("sequentialthinking") as
+  encoded text, sending about 1 in 5 official tools to the judge; (2) rule verbs matched inside
+  words ("authenti**cat**e ... password" read as "cat ... password"), blocking normal login tools;
+  (3) "silently" alone blocked the official filesystem server's `create_directory`
+  ("will succeed silently").
+- Revision: decoded Base64 must read like text (a space, >= 90% plain ASCII); rule verbs need
+  whole-word matches; "silently" counts only before an action verb. No new attack rules were added,
+  so the real files stay an untouched test.
+- Retest, real files: 5/7 poisoned tools caught by the hybrid, 20/28 disguised copies,
+  2/138 benign tools blocked (rules only: 2/7, 19/28; without normalisation: 1/28 disguised).
+- Retest, MCPTox test servers: recall 0.592 plain (was 0.653), 0.785 obfuscated (was 0.808),
+  FPR 0. The v0.5 figure was partly inflated by accidental in-word matches.
+- Synthetic benchmark unchanged. Tests: +7 (2 fail on v0.5). Demo: new "Scan server files" tab
+  (choose or drop real files or folders), option to disguise every description, new colour scheme;
+  JS extractor checked identical to Python on 260 real files.
+
 ## v0.5.0 - iteration 4 (tested on real MCP data)
 - Data: real-world benchmark from MCPTox (Wang et al., AAAI 2026): 362 real tool descriptions from
   45 live MCP servers and 485 real poisoned descriptions written for them, plus 1,940 obfuscated

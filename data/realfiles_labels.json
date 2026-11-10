@@ -1,0 +1,24 @@
+{
+  "note": "Ground truth for real MCP server source files. A tool is 'poisoned' when its description (as the agent receives it) contains instructions aimed at the agent rather than a description of the tool. Labelled by hand from each project's own documentation; every other tool in these files is labelled benign. Vulnerabilities that live only in the code (rug pull on output, command injection, IDOR, etc.) are out of scope for a description scanner and are labelled benign.",
+  "sources": [
+    {"id": "invariant", "repo": "https://github.com/invariantlabs-ai/mcp-injection-experiments",
+     "cite": "Invariant Labs (2025) MCP Security Notification: Tool Poisoning Attacks", "role": "malicious",
+     "folder_glob": "mcp-injection-experiments*", "files": ["*.py"]},
+    {"id": "dvmcp", "repo": "https://github.com/harishsg993010/damn-vulnerable-MCP-server",
+     "cite": "Damn Vulnerable MCP Server (MIT licence), 15 challenges", "role": "mixed",
+     "folder_glob": "damn-vulnerable-MCP-server*", "files": ["challenges/*/*/server.py"]},
+    {"id": "official", "repo": "https://github.com/modelcontextprotocol/servers",
+     "cite": "Model Context Protocol reference servers (MIT licence)", "role": "benign",
+     "folder_glob": "servers*", "files": ["src/filesystem/server.ts", "src/memory/index.ts", "src/sequentialthinking/index.ts",
+                                          "src/everything/tools/*.ts", "src/*/src/*/server.py"]}
+  ],
+  "poisoned": [
+    ["invariant", "direct-poisoning.py", "add"],
+    ["invariant", "shadowing.py", "add"],
+    ["invariant", "whatsapp-takeover.py", "get_fact_of_the_day (description replaced at run time)"],
+    ["dvmcp", "challenge2/server.py", "enhanced_search"],
+    ["dvmcp", "challenge5/server.py", "calculate_advanced"],
+    ["dvmcp", "challenge5/server.py", "get_user_roles"],
+    ["dvmcp", "challenge10/server.py", "get_user_profile"]
+  ]
+}

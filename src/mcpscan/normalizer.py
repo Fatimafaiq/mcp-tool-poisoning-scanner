@@ -10,6 +10,7 @@ HOMOGLYPHS = {
     "Н": "H", "К": "K", "М": "M", "Ѕ": "S",
 }
 B64_RE = re.compile(r"[A-Za-z0-9+/]{12,}={0,2}")
+TEXTY = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,:;/_-'\"!?@()~<>=+*&%$#[]{}\n\t")
 # v0.4: soft hyphen is legitimate typography, so it is stripped but never flagged.
 FLAG_ZW = set(ZERO_WIDTH) - {"\u00ad"}
 WORD_RE = re.compile(r"\w+", re.U)
@@ -33,7 +34,9 @@ def _decode_blobs(s):
             txt = base64.b64decode(tok + "===").decode("utf-8", "ignore")
         except Exception:
             continue
-        if len(txt) >= 4 and sum(c.isprintable() for c in txt) >= 0.8 * len(txt):
+        # v0.6: must read like text (a space and >= 90% plain ASCII), otherwise ordinary long
+        # identifiers such as "sequentialthinking" "decode" to printable junk and get flagged.
+        if len(txt) >= 6 and " " in txt and sum(c in TEXTY for c in txt) >= 0.9 * len(txt):
             out.append(txt)
     return out
 

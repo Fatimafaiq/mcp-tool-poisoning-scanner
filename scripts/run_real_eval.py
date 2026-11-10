@@ -2,9 +2,10 @@
 
 v0.4 rules were written on the synthetic benchmark only, so for them the whole real set is unseen.
 v0.5 rules were added after looking ONLY at the dev servers (40% of the 45 servers, seed 305);
+v0.6 then fixed word boundaries and the Base64 check after testing real MCP server files;
 the 27 test servers were not looked at until the rules were frozen. Reports recall on real attacks
 (plain and per obfuscation type), false-positive rate on real tool descriptions, Wilson 95%
-intervals, exact McNemar tests (v0.4 vs v0.5 rules), and how many misses reach the LLM judge.
+intervals, exact McNemar tests (v0.4 vs current rules), and how many misses reach the LLM judge.
 """
 import os, sys, json, random
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -88,8 +89,8 @@ def main():
     res = {"source": "MCPTox (Wang et al., AAAI 2026), defanged", "seed": SEED, "dev_servers": dev_servers}
     for part, items in (("all", M), ("dev", dev), ("test", test)):
         dets = {"v0.4_rule_no_norm": v04("rule", normalize_on=False), "v0.4_rule_norm": v04("rule"),
-                "v0.4_hybrid": v04("hybrid"), "v0.5_rule_no_norm": Scanner("rule", normalize_on=False),
-                "v0.5_rule_norm": Scanner("rule"), "v0.5_hybrid": Scanner("hybrid")}
+                "v0.4_hybrid": v04("hybrid"), "v0.6_rule_no_norm": Scanner("rule", normalize_on=False),
+                "v0.6_rule_norm": Scanner("rule"), "v0.6_hybrid": Scanner("hybrid")}
         out, preds, n, plain, obf, benign = evaluate(dets, items)
         res[part] = {"n": n, "detectors": out}
         if part == "test":
@@ -98,15 +99,15 @@ def main():
                 y = sum(1 for m in xs if preds[b][id(m)] and not preds[a][id(m)])
                 return {"a_only": x, "b_only": y, "p_value": mcnemar_exact(x, y)}
             res["test"]["mcnemar"] = {
-                "v0.5_rule_norm_vs_v0.4_rule_norm (plain)": paired("v0.5_rule_norm", "v0.4_rule_norm", plain),
-                "v0.5_rule_norm_vs_v0.4_rule_norm (obfuscated)": paired("v0.5_rule_norm", "v0.4_rule_norm", obf),
-                "v0.5_rule_norm_vs_v0.5_rule_no_norm (obfuscated)": paired("v0.5_rule_norm", "v0.5_rule_no_norm", obf)}
+                "v0.6_rule_norm_vs_v0.4_rule_norm (plain)": paired("v0.6_rule_norm", "v0.4_rule_norm", plain),
+                "v0.6_rule_norm_vs_v0.4_rule_norm (obfuscated)": paired("v0.6_rule_norm", "v0.4_rule_norm", obf),
+                "v0.6_rule_norm_vs_v0.6_rule_no_norm (obfuscated)": paired("v0.6_rule_norm", "v0.6_rule_no_norm", obf)}
             res["test"]["missed_plain_examples"] = [
                 {"server": m.server, "tool": m.tools[0].name, "text": m.tools[0].description[:240]}
-                for m in plain if not preds["v0.5_hybrid"][id(m)]][:15]
+                for m in plain if not preds["v0.6_hybrid"][id(m)]][:15]
             res["test"]["false_positive_examples"] = [
                 {"server": m.server, "tool": m.tools[0].name, "text": m.tools[0].description[:240]}
-                for m in benign if preds["v0.5_hybrid"][id(m)]]
+                for m in benign if preds["v0.6_hybrid"][id(m)]]
     json.dump(res, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 
     for part in ("dev", "test"):
@@ -117,8 +118,8 @@ def main():
         for name, d in res[part]["detectors"].items():
             print(f"{name:20} {d['recall_plain']['rate']:>12} {d['recall_obfuscated']['rate']:>11} "
                   f"{d['fpr_real_benign']['rate']:>11} {d['f1_obf']:>7} {d['judge_call_share']:>9}")
-    print("\nv0.5 rule_norm recall by obfuscation (test):",
-          {k: v["rate"] for k, v in res["test"]["detectors"]["v0.5_rule_norm"]["recall_by_obfuscation"].items()})
+    print("\nv0.6 rule_norm recall by obfuscation (test):",
+          {k: v["rate"] for k, v in res["test"]["detectors"]["v0.6_rule_norm"]["recall_by_obfuscation"].items()})
     print("McNemar (test):", json.dumps(res["test"]["mcnemar"]))
     print(f"\nwrote {os.path.relpath(OUT, ROOT)}")
 

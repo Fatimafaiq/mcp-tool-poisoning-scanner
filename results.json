@@ -321,13 +321,13 @@
     }
   },
   "latency_ms": {
-    "rule_no_norm": 0.0749,
-    "rule_norm": 0.1148,
-    "rule_norm_noflags": 0.1147,
-    "llm_stub": 0.1877,
-    "hybrid": 0.1262
+    "rule_no_norm": 0.0616,
+    "rule_norm": 0.1232,
+    "rule_norm_noflags": 0.0888,
+    "llm_stub": 0.1623,
+    "hybrid": 0.0966
   },
-  "hybrid_llm_call_share": 0.11,
+  "hybrid_llm_call_share": 0.07,
   "mcnemar_test_obf": {
     "rule_norm_vs_rule_no_norm": {
       "a_only": 25,
