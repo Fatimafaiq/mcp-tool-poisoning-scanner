@@ -11,6 +11,7 @@ from AI used to **help build** it.
 | Iteration (v0.4) | Claude | Proposed the Unicode control set and the false-positive fix | Team reviewed; 3 regression tests fail on v0.3 and pass on v0.4 |
 | Real-data iteration (v0.5) | Claude | Built the MCPTox loader, defanged the attacks, proposed the six v0.5 rules from the dev servers only | Rules frozen before the 27 test servers were scored; JS port re-checked identical on all 2,887 manifests; 2 new regression tests fail on v0.4 |
 | Real-file testing (v0.6) | Claude | Wrote the file reader (Python and JS), labelled the 7 poisoned tools from each project's docs, proposed the three false-positive fixes | Labels listed in `data/realfiles_labels.json` for review; JS reader identical to Python on 260 files; 2 new tests fail on v0.5 |
+| Live scanning (v0.7) | Claude | Wrote the MCP client (stdio and HTTP), change fingerprints and the live evaluation | Run against 10 real servers on 10 Nov 2026; HTTP path tested locally; 3 tests with a stand-in server |
 | Code scaffolding | GenAI assistant | Drafted module skeletons and the eval harness | Executed, unit-tested, reviewed by the author |
 | Test generation | GenAI assistant | Drafted `tests/test_ai_generated.py` (edge cases) | Run in CI; compared against the manual suite |
 | Drafting / editing | GenAI assistant | Rewrote prose in README and docs | Author checked facts and figures |

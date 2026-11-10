@@ -14,6 +14,18 @@ The manual suite fixed the core behaviour; the AI-generated suite surfaced cases
 missed, notably a **benign false-positive trap** (security words without an exfiltration instruction)
 and **mixed obfuscation**. Both run together; all 9 pass.
 
+## Iteration 6 (v0.7.0): live MCP servers
+- **Test:** the tutor asked for live data. The scanner now connects to running servers over the
+  MCP protocol and reads `tools/list`: 7 official servers at their current npm / PyPI versions and
+  Invariant Labs' 3 attack servers, 59 tools in total.
+- **Failure:** the WhatsApp attack server is clean on first start and swaps its description on
+  the second start. Content rules cannot see this (the swapped text also escapes the rules).
+- **Revision:** fingerprint each tool on every scan (`--pin`) and report a CHANGED description.
+- **Retest:** poisoned 2/3 by content, 3/3 with the change alert; official tools blocked 1/56.
+- **Limits:** remote HTTP servers could not be reached from our build environment (network
+  allowlist); the HTTP code path was tested against a local Streamable HTTP server instead.
+  Live results depend on the day: servers publish new versions.
+
 ## Iteration 5 (v0.6.0): real MCP server files
 - **Test:** scanned real source files instead of extracted text: Invariant Labs' published
   attacks (3 files), Damn Vulnerable MCP Server (15 servers) and the official reference servers

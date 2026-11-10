@@ -1,5 +1,19 @@
 # Changelog (development history)
 
+## v0.7.0 - iteration 6 (live MCP servers)
+- New: `mcpscan.live` connects to a running MCP server (local command over stdio, or a remote
+  URL over Streamable HTTP), performs the real MCP handshake and `tools/list`, and scans every
+  tool and parameter description before any agent sees them. No tool is ever called. Standard
+  library only.
+- `scripts/scan_live.py -- <command>` scans one server; `--pin` stores a fingerprint of each tool
+  so a later scan reports descriptions that CHANGED (rug pull); `--save` keeps the raw answer.
+- `scripts/run_live_eval.py` starts 10 servers from `data/live_servers.json`: 7 official servers
+  at their latest npm / PyPI versions and Invariant Labs' 3 attack servers.
+- Live result (10 Nov 2026): 11 scans, 59 tools. Poisoned tools caught by content 2/3; with the
+  change alert 3/3 (the WhatsApp rug pull is caught only because its description changed
+  between scans). Official tools blocked: 1/56 (filesystem `read_text_file`, the known limitation).
+- Tests: +3 using a stand-in stdio server (no network).
+
 ## v0.6.0 - iteration 5 (tested on real MCP server files)
 - New: `mcpscan.extract` reads real MCP server source files (FastMCP Python, TypeScript/JavaScript
   `registerTool`/`server.tool`, `tools/list` JSON) as text, without running them, including a

@@ -1,0 +1,18 @@
+{
+  "note": "Servers started live by scripts/run_live_eval.py. Official servers are fetched at their latest published version from npm / PyPI each run, so results can change as the servers change. Invariant Labs' proof-of-concept servers are started from data/external/ with the MCP Python SDK v1 (they are harmless to run: the attack needs an AI agent to follow the description; whatsapp-takeover creates an empty file ~/.mcp-triggered on first start).",
+  "servers": [
+    {"label": "benign", "source": "official npm", "cmd": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "."]},
+    {"label": "benign", "source": "official npm", "cmd": ["npx", "-y", "@modelcontextprotocol/server-memory"]},
+    {"label": "benign", "source": "official npm", "cmd": ["npx", "-y", "@modelcontextprotocol/server-everything"]},
+    {"label": "benign", "source": "official npm", "cmd": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]},
+    {"label": "benign", "source": "official PyPI", "cmd": ["uvx", "mcp-server-time"]},
+    {"label": "benign", "source": "official PyPI", "cmd": ["uvx", "mcp-server-fetch"]},
+    {"label": "benign", "source": "official PyPI", "cmd": ["uvx", "mcp-server-git", "--repository", "."]},
+    {"label": "malicious", "source": "Invariant Labs PoC", "poisoned_tools": ["add"],
+     "cmd": ["uv", "run", "--quiet", "--with", "mcp[cli]<2", "mcp", "run", "{ext}/mcp-injection-experiments*/direct-poisoning.py"]},
+    {"label": "malicious", "source": "Invariant Labs PoC", "poisoned_tools": ["add"],
+     "cmd": ["uv", "run", "--quiet", "--with", "mcp[cli]<2", "mcp", "run", "{ext}/mcp-injection-experiments*/shadowing.py"]},
+    {"label": "malicious", "source": "Invariant Labs PoC (rug pull: scanned twice)", "poisoned_tools": ["get_fact_of_the_day"], "rescan": true,
+     "cmd": ["uv", "run", "--quiet", "--with", "mcp[cli]<2", "mcp", "run", "{ext}/mcp-injection-experiments*/whatsapp-takeover.py"]}
+  ]
+}

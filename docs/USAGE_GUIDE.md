@@ -117,6 +117,33 @@ Windows tests: `set PYTHONPATH=src` then `python -m pytest -q`. Mac: `PYTHONPATH
    servers. Offline, the LLM judge is the keyword stub; use the published Claude page for the live
    Claude judge.
 
+## 3c. Live MCP servers (the "live dataset")
+
+Install once: Node.js (nodejs.org, gives `npx`) and uv (docs.astral.sh/uv, gives `uv` and `uvx`).
+
+```bash
+# scan one live server: the scanner starts it, asks for its tools, and checks them
+python scripts/scan_live.py -- npx -y @modelcontextprotocol/server-memory
+python scripts/scan_live.py -- uvx mcp-server-git --repository .
+
+# a real attack server (Invariant Labs), live
+python scripts/scan_live.py -- uv run --with "mcp[cli]<2" mcp run data/external/mcp-injection-experiments-main/shadowing.py
+
+# rug pull: run this twice; the second scan says CHANGED
+python scripts/scan_live.py --pin pins.json -- uv run --with "mcp[cli]<2" mcp run data/external/mcp-injection-experiments-main/whatsapp-takeover.py
+
+# everything at once (10 servers) -> results_live.json, plus data/live/*.tools.json
+python scripts/run_live_eval.py
+```
+
+A remote server works the same way with its URL: `python scripts/scan_live.py https://.../mcp`.
+To show it in the demo, open **Scan server files** and choose the `data/live` folder: each
+`.tools.json` file is a live server's real answer.
+
+What to say: "We don't only test stored data. The scanner connects to real MCP servers as they
+run today, gets the exact tool list an agent would get, and decides before the agent connects. It
+also remembers each tool, so if a server swaps its description later, we see it."
+
 ## 4. Results to quote
 
 | | Synthetic test split | MCPTox, 27 unseen servers | Real server files (48 files) |
@@ -124,6 +151,8 @@ Windows tests: `set PYTHONPATH=src` then `python -m pytest -q`. Mac: `PYTHONPATH
 | Poisoned caught | 0.571 (rules), 0.857 (hybrid) | 0.008 (v0.4) -> 0.592 (v0.6) | 5 of 7 (hybrid) |
 | Disguised caught | 0.071 without normalisation -> 0.964 with | 0.149 without -> 0.785 with | 1 of 28 without -> 20 of 28 with |
 | Legitimate tools blocked | 0 | 0 of 187 | 2 of 138 |
+
+Live servers (10 Nov 2026): 7 official servers and 3 attack servers, 59 tools. Poisoned caught 2 of 3 by content, 3 of 3 with the change alert; official tools blocked 1 of 56.
 
 ## 5. What to say (short script)
 

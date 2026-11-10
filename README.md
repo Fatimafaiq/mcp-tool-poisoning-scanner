@@ -33,7 +33,7 @@ a hosted LLM API, scikit-learn / SciPy (stats), Streamlit (dashboard).
 ```bash
 pip install -r requirements.txt
 python data/build_dataset.py          # generate the labelled benchmark (defanged)
-PYTHONPATH=src python -m pytest -q     # run the test suite (25 pass, 1 known limitation)
+PYTHONPATH=src python -m pytest -q     # run the test suite (28 pass, 1 known limitation)
 python scripts/run_eval.py            # synthetic benchmark -> results.json
 
 # real MCP data (MCPTox, AAAI 2026)
@@ -44,6 +44,10 @@ python scripts/run_real_eval.py       # dev/test by server, v0.4 vs v0.6 -> resu
 # real MCP server files (published attacks + official servers), see docs/USAGE_GUIDE.md
 python scripts/scan_file.py path/to/server.py_or_folder
 python scripts/run_realfiles_eval.py  # -> results_realfiles.json
+
+# live MCP servers (needs Node.js for npx and uv for uvx)
+python scripts/scan_live.py -- npx -y @modelcontextprotocol/server-memory
+python scripts/run_live_eval.py       # 10 live servers -> results_live.json
 python scripts/demo.py                # one-screen demonstration
 PYTHONPATH=src python -m mcpscan.cli data/obfuscated --mode hybrid   # scan a folder
 ```
@@ -74,6 +78,15 @@ Missed: the WhatsApp rug pull ("make sure to change the recipient...") and a DVM
 a second tool call after the main one. Blocked by mistake: the official filesystem server's
 `read_text_file` ("Use this tool when you need to examine...", see the known-limitation test) and a
 DVMCP challenge tool that describes the attack. The live Claude judge in the demo is the next measurement.
+
+## Live MCP servers (v0.7, scanned 10 Nov 2026)
+The scanner starts each server, performs the MCP handshake and reads `tools/list`, exactly what an
+agent would receive. Official servers are pulled at their latest published version on each run.
+
+| Servers | Tools | Poisoned caught | Legitimate tools blocked |
+|---|---|---|---|
+| 7 official (filesystem, memory, everything, sequential-thinking, time, fetch, git) | 56 | n/a | 1 |
+| 3 Invariant Labs attack servers (WhatsApp one scanned twice) | 4 | 2/3 by content, 3/3 with the change alert | 0 |
 
 ## Synthetic benchmark results (v0.6, offline heuristic judge, frozen test split)
 100 manifests (24 benign, 16 benign Unicode controls, 12 plain attacks, 48 obfuscated);
