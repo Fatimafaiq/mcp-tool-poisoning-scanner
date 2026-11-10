@@ -36,18 +36,17 @@
 * { box-sizing: border-box; }
 body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body); }
 .wrap { max-width: 1120px; margin: 0 auto; padding-block: 24px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.band { background: var(--band); color: var(--band-ink); border-radius: 22px; padding: 28px 28px 24px; display: block;
-  background-image: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--teal) 38%, transparent), transparent 58%), linear-gradient(160deg, var(--band), #024950); }
+.band { background: var(--band); color: var(--band-ink); border-radius: 22px; padding: 28px 28px 24px; display: block; }
 .band h1 { font: 700 clamp(2rem, 5vw, 3.1rem)/1 var(--display); letter-spacing: -0.03em; }
 .band .sub { color: var(--band-muted); font-size: 1rem; margin-top: 10px; }
 .band .meta { color: var(--band-muted); margin-top: 18px; font: 500 12px var(--body); gap: 8px; }
 .band .meta > * { border: 1px solid color-mix(in srgb, var(--band-muted) 35%, transparent); border-radius: 999px; padding: 3px 10px; }
 .band .meta a { color: var(--band-ink); text-decoration: none; }
-.pane .meter i { background: linear-gradient(90deg, var(--teal), var(--accent)); }
+.pane .meter i { background: var(--accent); }
 .reveal { margin-top: 20px; font: 400 14px/1.6 var(--mono); color: var(--band-ink); background: color-mix(in srgb, var(--band-ink) 7%, transparent); border-radius: 12px; padding: 12px 14px; max-width: 72ch; }
 .reveal .lead { display: block; font: 500 12px var(--body); color: var(--band-muted); margin-bottom: 4px; }
-.reveal .ink { color: transparent; border-radius: 4px; transition: color .9s ease, background-color .9s ease, text-shadow .9s ease; }
-.reveal.lit .ink { color: #fff4ef; background: #964734; box-shadow: 0 0 18px color-mix(in srgb, #964734 70%, transparent); }
+.reveal .ink { color: transparent; border-radius: 4px; transition: color .9s ease; }
+.reveal.lit .ink { color: #e3a08c; }
 @media (prefers-reduced-motion: reduce) { .reveal .ink { transition: none; } }
 header { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: end; justify-content: space-between; }
 h1 { font: 600 1.75rem/1.1 var(--display); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
@@ -87,7 +86,7 @@ textarea { min-height: 132px; resize: vertical; }
 .meter i { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 3px; transition: width .25s; }
 .ticks { display: flex; justify-content: space-between; font: 11px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
 .textview { font: 13px/1.6 var(--mono); background: var(--wash); border: 1px solid var(--line); border-radius: 12px; padding: 10px; white-space: pre-wrap; word-break: break-word; max-height: 170px; overflow: auto; }
-.zw { display: inline-block; font: 600 9px/1 var(--mono); color: #fff; background: var(--hidden); box-shadow: 0 0 8px color-mix(in srgb, var(--hidden) 60%, transparent); border-radius: 3px; padding: 2px 3px; margin: 0 1px; vertical-align: 2px; }
+.zw { display: inline-block; font: 600 9px/1 var(--mono); color: #fff; background: var(--hidden); border-radius: 3px; padding: 2px 3px; margin: 0 1px; vertical-align: 2px; }
 .hg { background: var(--warn-wash); color: var(--glyph); border-bottom: 2px solid var(--glyph); }
 .b64 { text-decoration: underline wavy var(--accent); text-underline-offset: 3px; }
 .hits { display: grid; gap: 6px; }
