@@ -5,7 +5,7 @@ manifests **before an agent loads them**. Prototype artefact for the CSIT305 res
 project *Detecting Obfuscated Tool Poisoning in MCP Servers: A Hybrid Rule-and-LLM Scanner*.
 
 
-**Final version: v1.0.0.** Development evidence (versions, iterations, decisions, tests, screenshots,
+**Evidence for reviewers, on one page: [`docs/EVIDENCE_INDEX.md`](docs/EVIDENCE_INDEX.md).** **Final version: v1.0.0.** Development evidence (versions, iterations, decisions, tests, screenshots,
 work distribution): [`docs/DEVELOPMENT_LOG.md`](docs/DEVELOPMENT_LOG.md). How to run and demo:
 [`docs/USAGE_GUIDE.md`](docs/USAGE_GUIDE.md). Live demo: https://claude.ai/artifact/FvvSS7XkiBubX5428oB7xY
 
