@@ -121,7 +121,7 @@ and adds their own commit to this file from their own GitHub account.**
 
 - Tamar Yibrah (8444134): built the synthetic benchmark and the 16 Unicode control tools; prepared the MCPTox data and checked the real-file labels. Confirmed matrix.
 
-- - Samaira Alam (8961566): led the demo page and colour scheme, the report, paper and evidence log; collected the screenshots. Confirmed matrix.
+- Samaira Alam (8961566): led the demo page and colour scheme, the report, paper and evidence log; collected the screenshots. Confirmed matrix.
 
 Note on commit authors: v0.1 to v0.4 and the 12 Nov demo commits were pushed from the shared
 Emtec Group account; v0.5 to v0.7 show "Claude" as author because they were produced with Claude
