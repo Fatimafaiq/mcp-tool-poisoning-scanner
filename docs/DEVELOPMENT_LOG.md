@@ -108,7 +108,7 @@ and adds their own commit to this file from their own GitHub account.**
 | Evaluation scripts and statistics | | | C | R | |
 | Real files and live scanning | R | C | | C | |
 | Demo page and colour scheme | C | | | | R |
-| Tests | | R | C | C | |
+| Tests | C | R | C | C | |
 | Report, paper, evidence log | C | C | C | C | R |
 
 [To confirm by each member before submission]
