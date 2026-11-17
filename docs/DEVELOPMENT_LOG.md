@@ -20,7 +20,7 @@ records what failed, what changed, and the retest.
 | v0.6.0 | 10 Nov | `5621b7e` | Iteration 3: reads real server source files; three false-positive fixes found on official servers | 20 files, +1,648 / -435 |
 | v0.7.0 | 10 Nov | `8bbc2f7` | Iteration 4: scans live MCP servers over the protocol; change alert for rug pulls | 13 files, +1,438 / -38 |
 | (team) | 12 Nov | `1e60bcb`, `35c94d4` | Team copy of the demo and colour fixes | 1 file |
-| v1.0.0 | 17 Nov | see `git log` | Final: evidence log, screenshots, team colour fixes merged into the demo, results re-run | |
+| v1.0.0 | 17 Nov | see `git log` | Final: evidence log, screenshots, team colour fixes merged, fail-closed error handling, results re-run | |
 
 ## 2. Prototype iterations (failure, revision, retest)
 
@@ -41,7 +41,7 @@ records what failed, what changed, and the retest.
 | Manifest schema | `src/mcpscan/schema.py` | v0.1 | v0.3 |
 | Normaliser | `src/mcpscan/normalizer.py` | v0.2 | v0.6 (Base64 text check) |
 | Rules (11) | `src/mcpscan/rules.yaml` | v0.1 | v0.6 (whole-word verbs) |
-| Rule scanner and hybrid router | `src/mcpscan/scanner.py` | v0.1 | v0.4 |
+| Rule scanner and hybrid router | `src/mcpscan/scanner.py` | v0.1 | v1.0 (fail-closed error paths) |
 | LLM judge (stub, Ollama, Claude in demo) | `src/mcpscan/llm_judge.py` | v0.2 | v0.4 |
 | File reader (Python, TS/JS, JSON) | `src/mcpscan/extract.py` | v0.6 | v0.6 |
 | Live MCP client (stdio, HTTP) | `src/mcpscan/live.py` | v0.7 | v1.0 |
@@ -50,7 +50,7 @@ records what failed, what changed, and the retest.
 | Evaluations | `scripts/run_eval.py`, `run_real_eval.py`, `run_realfiles_eval.py`, `run_live_eval.py` | v0.3 to v0.7 | v0.7 |
 | Command-line scanners | `scripts/scan_file.py`, `scripts/scan_live.py` | v0.6, v0.7 | v0.7 |
 | Browser demo | `demo/index.html` | v0.3 | v1.0 |
-| Tests (29) | `tests/` | v0.1 | v0.7 |
+| Tests (31) | `tests/` | v0.1 | v1.0 |
 
 ## 4. Design decisions
 
@@ -66,12 +66,13 @@ records what failed, what changed, and the retest.
 | 10 Nov | Live client written with the standard library | MCP SDK client | No version lock; SDK v2 broke the attack PoCs |
 | 10 Nov | Pin tool fingerprints | Content rules only | Rug pulls cannot be seen in one scan |
 | 17 Nov | Merge the team's demo colour fixes into the official demo | Keep two versions | One demo, matching the GitHub copy |
+| 17 Nov | Implement fail-closed error paths in code (judge or rule error withholds the tool) | Document only | The design promised it; review found it was not yet in the code |
 
 ## 5. Testing and validation evidence
 
 | Level | What | Result | Evidence |
 |---|---|---|---|
-| Unit and regression tests | 29 tests in 6 files | 28 pass, 1 expected failure (known limitation) | `docs/screenshots/v1.0/t_pytest.png` |
+| Unit and regression tests | 31 tests in 7 files | 30 pass, 1 expected failure (known limitation) | `docs/screenshots/v1.0/t_pytest.png` |
 | Synthetic benchmark | 100 manifests, frozen 59-manifest test split | Disguised attacks caught 0.071 without normalisation, 0.964 with; 0 false positives | `results.json`, `t_eval.png` |
 | Real data (MCPTox) | 2,787 manifests, 27 unseen test servers | Recall 0.592 plain, 0.785 disguised (0.149 without normalisation); 0 of 187 real tools blocked | `results_real.json`, `t_real.png` |
 | Real server files | 48 files, 145 tools, 7 poisoned | Hybrid 5 of 7; disguised 20 of 28 (1 of 28 without normalisation); 2 of 138 benign blocked | `results_realfiles.json`, `t_files.png` |

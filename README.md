@@ -38,7 +38,7 @@ a hosted LLM API, scikit-learn / SciPy (stats), Streamlit (dashboard).
 ```bash
 pip install -r requirements.txt
 python data/build_dataset.py          # generate the labelled benchmark (defanged)
-PYTHONPATH=src python -m pytest -q     # run the test suite (28 pass, 1 known limitation)
+PYTHONPATH=src python -m pytest -q     # run the test suite (30 pass, 1 known limitation)
 python scripts/run_eval.py            # synthetic benchmark -> results.json
 
 # real MCP data (MCPTox, AAAI 2026)

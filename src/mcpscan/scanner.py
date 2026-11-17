@@ -42,19 +42,35 @@ class Scanner:
         self.judge = judge or HeuristicJudge()
         self.llm_calls = 0
 
+    # Fail closed (v1.0): any error in a stage withholds the tool instead of passing it.
+    WITHHELD = {"label": "malicious", "error": True}
+
+    def _judge(self, text, r):
+        self.llm_calls += 1
+        try:
+            j = self.judge.judge(text)
+            if j.get("label") not in ("malicious", "benign"):
+                raise ValueError("judge returned no label")
+            return {"label": j["label"], "rule": r, "llm": j}
+        except Exception as e:  # timeout, bad JSON, network: fall back to a decisive rule verdict, else withhold
+            if r and r.get("verdict") in ("malicious", "benign"):
+                return {"label": r["verdict"], "rule": r, "llm": None, "error": f"judge failed: {e}"}
+            return {**self.WITHHELD, "rule": r, "llm": None, "reason": f"judge failed: {e}"}
+
     def _tool(self, text):
-        r = self.rs.score(text)
+        try:
+            r = self.rs.score(text)
+        except Exception as e:  # rule error: escalate to the judge; if that fails too, withhold
+            r = {"score": None, "verdict": "uncertain", "hits": [], "error": str(e)}
+            if self.mode == "rule":
+                return {**self.WITHHELD, "rule": r, "llm": None, "reason": f"rule error: {e}"}
         if self.mode == "rule":
             return {"label": "malicious" if r["verdict"] == "malicious" else "benign", "rule": r, "llm": None}
         if self.mode == "llm":
-            self.llm_calls += 1
-            j = self.judge.judge(text)
-            return {"label": j["label"], "rule": r, "llm": j}
+            return self._judge(text, r)
         if r["verdict"] in ("malicious", "benign"):
             return {"label": r["verdict"], "rule": r, "llm": None}
-        self.llm_calls += 1
-        j = self.judge.judge(text)
-        return {"label": j["label"], "rule": r, "llm": j}
+        return self._judge(text, r)
 
     def scan(self, manifest):
         tools = [self._tool(b) for b in manifest.text_blobs()]

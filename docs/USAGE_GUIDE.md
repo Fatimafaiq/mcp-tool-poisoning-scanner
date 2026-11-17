@@ -70,7 +70,7 @@ git clone https://github.com/Fatimafaiq/mcp-tool-poisoning-scanner
 cd mcp-tool-poisoning-scanner
 pip install -r requirements.txt
 
-PYTHONPATH=src python -m pytest -q        # 25 passed, 1 xfailed (known limitation)
+PYTHONPATH=src python -m pytest -q        # 30 passed, 1 xfailed (known limitation)
 python scripts/demo.py                   # one-screen walkthrough of a single attack
 python scripts/run_eval.py               # synthetic benchmark -> results.json
 

@@ -7,6 +7,9 @@
 - All evaluations re-run on 17 Nov; outputs and screenshots in `docs/screenshots/v1.0/`.
   Results unchanged from v0.7 (live servers: 3 of 3 attacks caught, 1 of 56 official tools blocked).
 - Demo: the team's 12 Nov colour fixes merged into `demo/index.html`; version shown as v1.0.0.
+- Fail-closed error paths implemented in `scanner.py`: a judge error falls back to a decisive rule
+  verdict, otherwise the tool is withheld; a rule error escalates to the judge. +2 tests (31 total).
+  Review on 17 Nov found the design described this but the code did not yet do it. Results unchanged.
 
 ## v0.7.0 - iteration 6 (live MCP servers)
 - New: `mcpscan.live` connects to a running MCP server (local command over stdio, or a remote
