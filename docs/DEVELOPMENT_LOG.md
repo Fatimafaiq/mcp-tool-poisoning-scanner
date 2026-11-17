@@ -113,6 +113,8 @@ and adds their own commit to this file from their own GitHub account.**
 
 [To confirm by each member before submission]
 
+- Dimah Sabah (1064344): ran the evaluations and statistics (Wilson intervals, McNemar tests, attack success rate); checked the results tables against results.json. Confirmed matrix.
+
 Note on commit authors: v0.1 to v0.4 and the 12 Nov demo commits were pushed from the shared
 Emtec Group account; v0.5 to v0.7 show "Claude" as author because they were produced with Claude
 and pushed from this session (see `AI_USE_DECLARATION.md`). Individual work is therefore recorded in
