@@ -857,7 +857,7 @@ function renderTable(rows) {
 async function saveRun(rows, perItem, n, tier, which) {
   try {
     await db.collection("runs").add({
-      at: new Date().toISOString(), scanner: "v0.5.0", dataset: which.startsWith("real") ? "mcptox" : "synthetic", manifests: n, split: which, judge: "claude", tier,
+      at: new Date().toISOString(), scanner: "v1.0.0", dataset: which.startsWith("real") ? "mcptox" : "synthetic", manifests: n, split: which, judge: "claude", tier,
       results: rows.map(r => ({ detector: r.k, name: r.name, recall_plain: r.recPlain, recall_obf: r.recObf, fpr_benign: r.fprBen, fpr_controls: r.fprCtl, f1_obf: +r.f1.toFixed(3), asr_on: +r.asrOn.toFixed(3), llm_calls: r.calls, ms_per_tool: Math.round(r.msPerTool) })),
       predictions: perItem,
     });

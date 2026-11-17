@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcpscan"
+version = "1.0.0"
+description = "Detect hidden (including obfuscated) instructions in MCP tool descriptions before an AI agent loads them"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["pyyaml>=6.0"]
+license = { text = "MIT" }
+authors = [{ name = "CSIT305 Emtec Group (Fatima Faiq, Zehra Zarin Firoz, Tamar Yibrah, Dimah Sabah, Samaira Alam)" }]
+
+[project.scripts]
+mcpscan = "mcpscan.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+packages = ["mcpscan"]
+
+[tool.setuptools.package-data]
+mcpscan = ["*.yaml"]

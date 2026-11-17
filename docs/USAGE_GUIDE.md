@@ -21,6 +21,16 @@ Our scanner checks every tool description **before** the agent loads it:
    text and answers benign or malicious with a reason. This keeps cost low, because most tools
    never need the LLM.
 
+## 1b. The tool itself (one command)
+
+```bash
+pip install git+https://github.com/Fatimafaiq/mcp-tool-poisoning-scanner
+mcpscan scan <file or folder>          # real server files
+mcpscan live -- <command that starts a server>
+mcpscan text "a tool description"
+```
+On Windows, if `mcpscan` is not found after installing, use `python -m mcpscan.cli` instead.
+
 ## 2. The demo (what to show the panel)
 
 Open the published demo in Claude (or double-click `demo/index.html`). It has three tabs.
