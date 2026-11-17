@@ -113,7 +113,10 @@ and adds their own commit to this file from their own GitHub account.**
 
 [To confirm by each member before submission]
 
+- Fatima Faiq (7826965): designed the LLM-as-judge prompt and tested it in the demo; ran the real-file and live-server scans; owns the repository and created the v1.0.0 release. Confirmed matrix.
+
 - Dimah Sabah (1064344): ran the evaluations and statistics (Wilson intervals, McNemar tests, attack success rate); checked the results tables against results.json. Confirmed matrix.
+  
 - Zehra Zarin Firoz (9972997): built and tested the normaliser and rules; wrote the manual unit and Unicode regression tests; reviewed the v0.6 false-positive fixes. Confirmed matrix.
 
 Note on commit authors: v0.1 to v0.4 and the 12 Nov demo commits were pushed from the shared
