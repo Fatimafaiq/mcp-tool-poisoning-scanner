@@ -119,6 +119,8 @@ and adds their own commit to this file from their own GitHub account.**
   
 - Zehra Zarin Firoz (9972997): built and tested the normaliser and rules; wrote the manual unit and Unicode regression tests; reviewed the v0.6 false-positive fixes. Confirmed matrix.
 
+- Tamar Yibrah (8444134): built the synthetic benchmark and the 16 Unicode control tools; prepared the MCPTox data and checked the real-file labels. Confirmed matrix.
+
 Note on commit authors: v0.1 to v0.4 and the 12 Nov demo commits were pushed from the shared
 Emtec Group account; v0.5 to v0.7 show "Claude" as author because they were produced with Claude
 and pushed from this session (see `AI_USE_DECLARATION.md`). Individual work is therefore recorded in
