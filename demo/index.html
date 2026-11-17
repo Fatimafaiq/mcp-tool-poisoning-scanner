@@ -892,7 +892,7 @@ $("runBench").onclick = async () => {
     $("progress").textContent = `Finished ${rows.length} detector${rows.length > 1 ? "s" : ""} on ${items.length} manifests${chosen.some(d => d[3]) ? (useClaude ? `, judge: Claude (${tier})` : ", judge: offline stub") : ""}.`;
     if (db && useClaude && chosen.some(d => d[3])) await saveRun(rows, perItem, items.length, tier, which);
   } catch (e) {
-    $("progress").textContent = e.code === "cancelled" ? "Stopped. Completed detectors are shown." : (ERR[e.code] || "The run stopped because the judge could not answer.");
+    $("progress").textContent = signal.aborted ? "Stopped. Completed detectors are shown." : `Claude could not answer (${e.code || "error"}${e.message ? ": " + e.message : ""}). ${ERR[e.code] || "Try Inspect a tool, Ask the LLM judge first, allow access, then run again."} Completed detectors are shown.`;
   } finally { $("runBench").disabled = false; $("stopBench").disabled = true; }
 };
 
