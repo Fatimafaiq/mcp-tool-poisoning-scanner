@@ -1,0 +1,101 @@
+
+LIVE  secure-filesystem-server 1.0.0  (14 tools)  <- npx -y @modelcontextprotocol/server-filesystem .
+  ok    read_file                                score 0.00  -
+  BLOCK read_text_file                           score 0.60  cross_tool_precondition, other_tool_call
+  ok    read_media_file                          score 0.00  -
+  ok    read_multiple_files                      score 0.00  -
+  ok    write_file                               score 0.00  -
+  ok    edit_file                                score 0.00  -
+  ok    create_directory                         score 0.00  -
+  ok    list_directory                           score 0.00  -
+  ok    list_directory_with_sizes                score 0.00  -
+  ok    directory_tree                           score 0.00  -
+  ok    move_file                                score 0.00  -
+  ok    search_files                             score 0.00  -
+  ok    get_file_info                            score 0.00  -
+  ok    list_allowed_directories                 score 0.00  -
+  => server verdict: DO NOT CONNECT (1 poisoned tool)
+
+LIVE  memory-server 1.0.0  (9 tools)  <- npx -y @modelcontextprotocol/server-memory
+  ok    create_entities                          score 0.00  -
+  ok    create_relations                         score 0.00  -
+  ok    add_observations                         score 0.00  -
+  ok    delete_entities                          score 0.00  -
+  ok    delete_observations                      score 0.00  -
+  ok    delete_relations                         score 0.00  -
+  ok    read_graph                               score 0.00  -
+  ok    search_nodes                             score 0.00  -
+  ok    open_nodes                               score 0.00  -
+  => server verdict: clean
+
+LIVE  mcp-servers/everything 1.0.0  (13 tools)  <- npx -y @modelcontextprotocol/server-everything
+  ok    echo                                     score 0.00  -
+  ok    get-annotated-message                    score 0.00  -
+  ok    get-env                                  score 0.00  -
+  ok    get-resource-links                       score 0.00  -
+  ok    get-resource-reference                   score 0.00  -
+  ok    get-structured-content                   score 0.00  -
+  ok    get-sum                                  score 0.00  -
+  ok    get-tiny-image                           score 0.00  -
+  ok    gzip-file-as-resource                    score 0.00  -
+  ok    toggle-simulated-logging                 score 0.00  -
+  ok    toggle-subscriber-updates                score 0.00  -
+  ok    trigger-long-running-operation           score 0.00  -
+  ok    simulate-research-query                  score 0.00  -
+  => server verdict: clean
+
+LIVE  sequential-thinking-server 1.0.0  (1 tools)  <- npx -y @modelcontextprotocol/server-sequential-thinking
+  ok    sequentialthinking                       score 0.00  -
+  => server verdict: clean
+
+LIVE  mcp-time 2026.11.11  (3 tools)  <- uvx mcp-server-time
+  ok    get_current_time                         score 0.00  -
+  ok    convert_time                             score 0.00  -
+  ok    get_time_ago                             score 0.00  -
+  => server verdict: clean
+
+LIVE  mcp-fetch 2026.11.11  (1 tools)  <- uvx mcp-server-fetch
+  ok    fetch                                    score 0.00  -
+  => server verdict: clean
+
+LIVE  mcp-git 2026.11.11  (14 tools)  <- uvx mcp-server-git --repository .
+  ok    git_status                               score 0.00  -
+  ok    git_diff_unstaged                        score 0.00  -
+  ok    git_diff_staged                          score 0.00  -
+  ok    git_diff                                 score 0.00  -
+  ok    git_commit                               score 0.00  -
+  ok    git_add                                  score 0.00  -
+  ok    git_reset                                score 0.00  -
+  ok    git_log                                  score 0.00  -
+  ok    git_create_branch                        score 0.00  -
+  ok    git_checkout                             score 0.00  -
+  ok    git_merge                                score 0.00  -
+  ok    git_show                                 score 0.00  -
+  ok    git_branch                               score 0.00  -
+  ok    git_remote                               score 0.00  -
+  => server verdict: clean
+
+LIVE  Demo 1.30.0  (1 tools)  <- uv run --quiet --with mcp[cli]<2 mcp run data/external/mcp-injection-experiments/direct-poisoning.py
+  BLOCK add                                      score 1.00  secret_file_read, concealment, sensitive_target
+  => server verdict: DO NOT CONNECT (1 poisoned tool)
+
+LIVE  Demo 1.30.0  (1 tools)  <- uv run --quiet --with mcp[cli]<2 mcp run data/external/mcp-injection-experiments/shadowing.py
+  BLOCK add                                      score 0.80  exfiltration, concealment
+  => server verdict: DO NOT CONNECT (1 poisoned tool)
+
+LIVE  Random Facts MCP Server 1.30.0  (1 tools)  <- uv run --quiet --with mcp[cli]<2 mcp run data/external/mcp-injection-experiments/whatsapp-takeover.py
+  ok    get_fact_of_the_day                      score 0.00  -
+  => server verdict: clean
+
+LIVE  Updated MCP Server 1.30.0  (1 tools)  <- uv run --quiet --with mcp[cli]<2 mcp run data/external/mcp-injection-experiments/whatsapp-takeover.py
+  ok    get_fact_of_the_day                      score 0.00  -  CHANGED since last scan
+  => server verdict: clean; 1 description(s) changed since the pinned scan
+
+Live scan 2026-11-17T10:39:07+00:00 {
+ "servers_reached": 11,
+ "tools": 59,
+ "poisoned_caught_by_content": "2/3",
+ "poisoned_caught_incl_change_alert": "3/3",
+ "benign_blocked": "1/56"
+}
+wrote results_live.json and data/live/*.tools.json

@@ -1,0 +1,23 @@
+
+[dev] 18 servers: 175 real benign tools, 220 real attacks, 880 obfuscated variants
+detector             recall plain  recall obf  FPR benign  F1 obf  to judge
+v0.4_rule_no_norm           0.005       0.001         0.0   0.002       0.0
+v0.4_rule_norm              0.005        0.16         0.0   0.276       0.0
+v0.4_hybrid                 0.027       0.174         0.0   0.296     0.504
+v0.6_rule_no_norm           0.891       0.225         0.0   0.367       0.0
+v0.6_rule_norm              0.891       0.942         0.0    0.97       0.0
+v0.6_hybrid                 0.895       0.942         0.0    0.97     0.049
+
+[test] 27 servers: 187 real benign tools, 265 real attacks, 1060 obfuscated variants
+detector             recall plain  recall obf  FPR benign  F1 obf  to judge
+v0.4_rule_no_norm           0.008         0.0         0.0     0.0       0.0
+v0.4_rule_norm              0.008       0.069         0.0   0.129       0.0
+v0.4_hybrid                 0.023       0.072         0.0   0.134      0.53
+v0.6_rule_no_norm           0.592       0.149         0.0   0.259       0.0
+v0.6_rule_norm              0.592       0.785         0.0   0.879       0.0
+v0.6_hybrid                 0.592       0.785         0.0   0.879     0.169
+
+v0.6 rule_norm recall by obfuscation (test): {'base64': 0.842, 'homoglyph': 0.842, 'mixed': 0.842, 'zero_width': 0.615}
+McNemar (test): {"v0.6_rule_norm_vs_v0.4_rule_norm (plain)": {"a_only": 156, "b_only": 1, "p_value": 1.73e-45}, "v0.6_rule_norm_vs_v0.4_rule_norm (obfuscated)": {"a_only": 771, "b_only": 12, "p_value": 4.07e-210}, "v0.6_rule_norm_vs_v0.6_rule_no_norm (obfuscated)": {"a_only": 674, "b_only": 0, "p_value": 2.55e-203}}
+
+wrote results_real.json

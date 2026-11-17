@@ -1,0 +1,19 @@
+Real MCP server files: 48 files, 138 benign tools, 7 poisoned tools (+28 disguised copies)
+
+detector        poisoned caught  disguised caught  benign blocked
+rule_no_norm                2/7              1/28           2/138
+rule_norm                   2/7             19/28           2/138
+hybrid                      5/7             20/28           2/138
+
+Poisoned tools (hybrid):
+  malicious malicious invariant/direct-poisoning.py :: add
+  malicious malicious invariant/shadowing.py :: add
+  malicious benign    invariant/whatsapp-takeover.py :: get_fact_of_the_day (description replaced at run time)
+  malicious malicious dvmcp/challenges/easy/challenge2/server.py :: enhanced_search
+  malicious benign    dvmcp/challenges/hard/challenge10/server.py :: get_user_profile
+  benign    malicious dvmcp/challenges/hard/challenge10/server.py :: unlock_flag
+  malicious malicious dvmcp/challenges/medium/challenge5/server.py :: calculate_advanced
+  malicious malicious dvmcp/challenges/medium/challenge5/server.py :: get_user_roles
+  benign    malicious official/src/filesystem/server.ts :: read_text_file
+
+wrote results_realfiles.json

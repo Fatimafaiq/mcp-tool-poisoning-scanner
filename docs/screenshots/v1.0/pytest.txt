@@ -1,0 +1,40 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/claude/mcp-tool-poisoning-scanner
+configfile: pytest.ini
+testpaths: tests
+plugins: platformdirs-4.13.5, anyio-4.15.1
+collecting ... collected 29 items
+
+tests/test_ai_generated.py::test_mixed_obfuscation_caught PASSED         [  3%]
+tests/test_ai_generated.py::test_benign_mentioning_security_words_not_flagged PASSED [  6%]
+tests/test_ai_generated.py::test_empty_description_is_benign PASSED      [ 10%]
+tests/test_core.py::test_strip_zero_width PASSED                         [ 13%]
+tests/test_core.py::test_homoglyph_mapped PASSED                         [ 17%]
+tests/test_core.py::test_base64_decoded PASSED                           [ 20%]
+tests/test_core.py::test_benign_passes PASSED                            [ 24%]
+tests/test_core.py::test_plain_attack_caught PASSED                      [ 27%]
+tests/test_core.py::test_normalization_restores_detection PASSED         [ 31%]
+tests/test_v04_unicode_controls.py::test_emoji_joiner_in_russian_text_not_blocked PASSED [ 34%]
+tests/test_v04_unicode_controls.py::test_russian_base64_codec_not_blocked PASSED [ 37%]
+tests/test_v04_unicode_controls.py::test_genuine_russian_words_not_flagged_as_homoglyphs PASSED [ 41%]
+tests/test_v04_unicode_controls.py::test_zero_width_inside_latin_word_still_flagged PASSED [ 44%]
+tests/test_v04_unicode_controls.py::test_mixed_script_attack_still_blocked PASSED [ 48%]
+tests/test_v05_real_patterns.py::test_priority_claim_with_argument_tampering_blocked PASSED [ 51%]
+tests/test_v05_real_patterns.py::test_cross_tool_hijack_blocked PASSED   [ 55%]
+tests/test_v05_real_patterns.py::test_cross_tool_hijack_with_look_alike_letters_blocked PASSED [ 58%]
+tests/test_v05_real_patterns.py::test_plain_description_allowed PASSED   [ 62%]
+tests/test_v05_real_patterns.py::test_legitimate_ordering_hint_is_not_blocked_outright XFAIL [ 65%]
+tests/test_v06_real_files.py::test_fastmcp_docstring_extracted PASSED    [ 68%]
+tests/test_v06_real_files.py::test_runtime_description_swap_extracted PASSED [ 72%]
+tests/test_v06_real_files.py::test_typescript_register_tool_with_concatenation PASSED [ 75%]
+tests/test_v06_real_files.py::test_tools_list_json PASSED                [ 79%]
+tests/test_v06_real_files.py::test_long_identifier_is_not_flagged_as_base64 PASSED [ 82%]
+tests/test_v06_real_files.py::test_real_base64_sentence_still_decoded PASSED [ 86%]
+tests/test_v06_real_files.py::test_verbs_match_whole_words_only PASSED   [ 89%]
+tests/test_v07_live.py::test_lists_tools_over_stdio PASSED               [ 93%]
+tests/test_v07_live.py::test_live_scan_blocks_poisoned_server PASSED     [ 96%]
+tests/test_v07_live.py::test_pin_reports_changed_description PASSED      [100%]
+
+======================== 28 passed, 1 xfailed in 0.22s =========================

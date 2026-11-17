@@ -1,5 +1,13 @@
 # Changelog (development history)
 
+## v1.0.0 - final artefact (17 Nov 2026)
+- `docs/DEVELOPMENT_LOG.md`: version history with commit hashes, seven prototype iterations
+  (failure, revision, retest), implementation records, design decisions, testing evidence,
+  screenshots and the work distribution matrix (responds to the 10 Nov tutor feedback).
+- All evaluations re-run on 17 Nov; outputs and screenshots in `docs/screenshots/v1.0/`.
+  Results unchanged from v0.7 (live servers: 3 of 3 attacks caught, 1 of 56 official tools blocked).
+- Demo: the team's 12 Nov colour fixes merged into `demo/index.html`; version shown as v1.0.0.
+
 ## v0.7.0 - iteration 6 (live MCP servers)
 - New: `mcpscan.live` connects to a running MCP server (local command over stdio, or a remote
   URL over Streamable HTTP), performs the real MCP handshake and `tools/list`, and scans every

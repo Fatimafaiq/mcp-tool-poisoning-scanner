@@ -1,5 +1,5 @@
 {
- "scanned_at": "2026-11-10T10:44:48+00:00",
+ "scanned_at": "2026-11-17T10:39:07+00:00",
  "servers": [
   {
    "cmd": [
@@ -563,7 +563,7 @@
    "source": "official PyPI",
    "scan": 1,
    "server": "mcp-time",
-   "version": "2026.11.4",
+   "version": "2026.11.11",
    "tools": [
     {
      "name": "get_current_time",
@@ -623,7 +623,7 @@
    "source": "official PyPI",
    "scan": 1,
    "server": "mcp-fetch",
-   "version": "2026.11.4",
+   "version": "2026.11.11",
    "tools": [
     {
      "name": "fetch",
@@ -655,7 +655,7 @@
    "source": "official PyPI",
    "scan": 1,
    "server": "mcp-git",
-   "version": "2026.11.4",
+   "version": "2026.11.11",
    "tools": [
     {
      "name": "git_status",
@@ -745,13 +745,14 @@
      "name": "git_log",
      "description": "Shows the commit logs",
      "params": {
+      "max_count": "Maximum number of commits to show. Must be at least 1.",
       "start_timestamp": "Start timestamp for filtering commits. Accepts: ISO 8601 format (e.g., '2024-01-15T14:30:25'), relative dates (e.g., '2 weeks ago', 'yesterday'), or absolute dates (e.g., '2024-01-15', 'Jan 15 2024')",
       "end_timestamp": "End timestamp for filtering commits. Accepts: ISO 8601 format (e.g., '2024-01-15T14:30:25'), relative dates (e.g., '2 weeks ago', 'yesterday'), or absolute dates (e.g., '2024-01-15', 'Jan 15 2024')"
      },
      "verdict": "benign",
      "score": 0.0,
      "hits": [],
-     "fingerprint": "536e416c7b77cf32",
+     "fingerprint": "acb233df5a64062f",
      "changed": false,
      "new": false,
      "label": "benign"

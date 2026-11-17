@@ -9,7 +9,7 @@ Two transports, standard library only (no SDK version to match):
 import hashlib, json, os, queue, shutil, subprocess, sys, threading, time, urllib.request
 
 PROTOCOL = "2025-06-18"
-CLIENT = {"name": "mcpscan", "version": "0.7.0"}
+CLIENT = {"name": "mcpscan", "version": "1.0.0"}
 
 
 class LiveError(RuntimeError):
